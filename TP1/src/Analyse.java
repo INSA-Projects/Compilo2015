@@ -1,7 +1,7 @@
 import java.io.*;
 public class Analyse {
   public static void main(String args[]) {
-    AutoDoc analyseur;
+    AutoDocHtml analyseur;
     InputStream flot;
     if (args.length==1) {
       System.out.print(args[0] + ": ");
@@ -19,7 +19,7 @@ public class Analyse {
       return;
     }
     try {
-      analyseur = new AutoDoc(flot);
+      analyseur = new AutoDocHtml(flot);
       analyseur.moteur();
       System.out.println("analyse reussie!");
     } catch (AnalyseException e) {
