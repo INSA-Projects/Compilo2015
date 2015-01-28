@@ -1,0 +1,5 @@
+ doc  
+ date   1982    findate  
+ para    ceci est ma premiere section    finpara  
+ para    ceci est ma deuxieme section    finpara  
+ findoc
