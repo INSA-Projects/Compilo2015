@@ -1,6 +1,4 @@
-# Ignore everything
-*
-
-# Except .java
-!.gitignore
-!*/*.java
+*.class
+*.settings/
+*.classpath
+*.project
