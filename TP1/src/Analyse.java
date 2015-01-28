@@ -25,6 +25,7 @@ public class Analyse {
     } catch (AnalyseException e) {
       String msg = e.getMessage();
       System.out.println("Erreur de syntaxe : \n"+msg);
+
     }//catch
   }//main
 }//Analyse

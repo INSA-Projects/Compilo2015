@@ -1,22 +1,22 @@
 import java.io.*;
 /**
- * la classe Automate modélise un automate abstrait
- * @author : Marie-Jo Pédrono
- * date de création : 18 mars 2003
+ * la classe Automate modï¿½lise un automate abstrait
+ * @author : Marie-Jo Pï¿½drono
+ * date de crï¿½ation : 18 mars 2003
  */
  abstract class Automate {
 
     TokenManager lex;// l'analyseur lexical
     public  Token token;// le token courant
 
-   int etatInitial ; //états spécifiques de l'automate
+   int etatInitial ; //ï¿½tats spï¿½cifiques de l'automate
    int etatFinal ;
    int etatErreur = -1;
 
 /**
  * Constructeur Automate pour initialisation
  * appel le constructeur d'analyse lexicale
- * @param le flot d'entrée
+ *  @param flot d'entrï¿½e
  * 
  */
    Automate (InputStream flot){
@@ -41,10 +41,10 @@ import java.io.*;
   }
               
  /**
-   *  Methode astraite qui calcule l'état suivant
-   *  @param etat : l'état courant
-   *  @param unite : l'unité du token courant
-   *  @return l'état suivant
+   *  Methode astraite qui calcule l'ï¿½tat suivant
+   *  @param etat : l'ï¿½tat courant
+   *  @param unite : l'unitï¿½ du token courant
+   *  @return l'ï¿½tat suivant
    */
  
    abstract int getTransition(int etat, int unite);
