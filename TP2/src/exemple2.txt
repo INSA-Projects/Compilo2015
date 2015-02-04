@@ -1,0 +1,5 @@
+para  ceci date 1982 deuxieme section finpara
+findoc
+doc
+date 1982 findate
+para  

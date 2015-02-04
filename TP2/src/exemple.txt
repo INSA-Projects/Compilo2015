@@ -1,0 +1,19 @@
+doc
+	titre Document fintitre
+	date 1982 findate
+	para
+		Ceci est ma premiere *section.
+		para Ceci est mon premier paragraphe finpara
+		para Ceci est mon deuxieme paragraphe finpara
+	finpara
+	para
+		Ceci est ma deuxieme section
+		para
+			Premier sous *paragraphe, le voici.
+			para Ceci est du *texte finpara
+			para Ceci est aussi du texte finpara
+			para Ceci est encore du texte finpara
+		finpara
+	finpara
+findoc
+\n
