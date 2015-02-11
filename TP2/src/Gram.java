@@ -1,6 +1,11 @@
+/**
+ * TP2 Compilation 3e annee
+ * @author Bonnucci Eric
+ * @author Esmieu Valentin
+ * @date 04/02/2015.
+ */
+
 import java.io.InputStream;
-
-
 public class Gram extends Analyse implements Constants
 {
 

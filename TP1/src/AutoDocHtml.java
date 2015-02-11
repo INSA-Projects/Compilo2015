@@ -1,6 +1,7 @@
 /**
- * @author Eric Bonnucci
- * @author Valentin Esmieu
+ * TP1 Compilation 3e annee
+ * @author Bonnucci Eric
+ * @author Esmieu Valentin
  * @date 28/01/2015.
  */
 import java.io.InputStream;
