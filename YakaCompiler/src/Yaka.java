@@ -3,7 +3,7 @@ public class Yaka implements YakaConstants {
   public static Declaration declaration;
   public static TabIdent tabIdent;
   public static Expression expression;
-  //public static YVM yvm;
+  public static YVM yvm;
 
   public static void main(String args[]) {
     Yaka analyseur;
