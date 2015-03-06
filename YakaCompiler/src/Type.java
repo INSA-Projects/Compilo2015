@@ -1,7 +1,7 @@
 
-public enum Type 
-{
+public enum Type {
 	ENTIER,
-	BOOLEAN,
-	ERROR
+	BOOLEEN,
+	ERREUR
+
 }
