@@ -28,8 +28,8 @@ public class Yaka implements YakaConstants {
     }
     try {
       analyseur = new Yaka(input);
-      prog();
-      System.out.println("Successful analysis !");
+      analyseur.prog();
+      System.out.println("Successfull analysis !");
     } catch (ParseException e) {
       String msg = e.getMessage();
       msg = msg.substring(0,msg.indexOf("\n"));

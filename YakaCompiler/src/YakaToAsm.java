@@ -1,5 +1,5 @@
 
-public class YakaToAsm extends YakaVirtualMachine
+public class YakaToAsm extends YVM
 {
 
 }
