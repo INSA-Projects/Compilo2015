@@ -20,7 +20,6 @@ public class TabIdent
 	 */
 	public Ident findIdent (String key)
 	{
-		
 		return table.get(key);
 	}
 	
