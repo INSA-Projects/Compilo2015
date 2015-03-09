@@ -274,6 +274,7 @@ public class Yaka implements YakaConstants {
     case 51:
       opRel();
       simpleExpr();
+                expression.controlType();
       break;
     default:
       jj_la1[11] = jj_gen;
@@ -297,6 +298,7 @@ public class Yaka implements YakaConstants {
       }
       opAdd();
       terme();
+                 expression.controlType();
     }
   }
 
@@ -316,6 +318,7 @@ public class Yaka implements YakaConstants {
       }
       opMul();
       facteur();
+                 expression.controlType();
     }
   }
 
@@ -332,6 +335,7 @@ public class Yaka implements YakaConstants {
     case 53:
       opNeg();
       primaire();
+                         expression.controlType();
       break;
     default:
       jj_la1[14] = jj_gen;
@@ -364,15 +368,19 @@ public class Yaka implements YakaConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case entier:
       jj_consume_token(entier);
+                 expression.pushOperande(Type.ENTIER);
       break;
     case ident:
       jj_consume_token(ident);
+                 expression.pushOperande(tabIdent.getType(YakaTokenManager.identLu));
       break;
     case VRAI:
       jj_consume_token(VRAI);
+                 expression.pushOperande(Type.BOOLEEN);
       break;
     case FAUX:
       jj_consume_token(FAUX);
+                 expression.pushOperande(Type.BOOLEEN);
       break;
     default:
       jj_la1[16] = jj_gen;
@@ -385,21 +393,27 @@ public class Yaka implements YakaConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case 42:
       jj_consume_token(42);
+                 expression.pushOperator(Operateur.EG);
       break;
     case 47:
       jj_consume_token(47);
+                 expression.pushOperator(Operateur.DIFF);
       break;
     case 48:
       jj_consume_token(48);
+                 expression.pushOperator(Operateur.INF);
       break;
     case 49:
       jj_consume_token(49);
+                 expression.pushOperator(Operateur.INFEG);
       break;
     case 50:
       jj_consume_token(50);
+                 expression.pushOperator(Operateur.SUP);
       break;
     case 51:
       jj_consume_token(51);
+                 expression.pushOperator(Operateur.SUPEG);
       break;
     default:
       jj_la1[17] = jj_gen;
@@ -412,12 +426,15 @@ public class Yaka implements YakaConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case 52:
       jj_consume_token(52);
+                 expression.pushOperator(Operateur.PLUS);
       break;
     case 53:
       jj_consume_token(53);
+                 expression.pushOperator(Operateur.MOINS);
       break;
     case OU:
       jj_consume_token(OU);
+                 expression.pushOperator(Operateur.OU);
       break;
     default:
       jj_la1[18] = jj_gen;
@@ -430,12 +447,15 @@ public class Yaka implements YakaConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case 54:
       jj_consume_token(54);
+                 expression.pushOperator(Operateur.MULT);
       break;
     case 55:
       jj_consume_token(55);
+                 expression.pushOperator(Operateur.DIV);
       break;
     case ET:
       jj_consume_token(ET);
+                 expression.pushOperator(Operateur.ET);
       break;
     default:
       jj_la1[19] = jj_gen;
@@ -448,9 +468,11 @@ public class Yaka implements YakaConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case 53:
       jj_consume_token(53);
+                 expression.pushOperator(Operateur.MOINS);
       break;
     case NON:
       jj_consume_token(NON);
+                 expression.pushOperator(Operateur.NON);
       break;
     default:
       jj_la1[20] = jj_gen;

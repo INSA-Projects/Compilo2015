@@ -25,7 +25,6 @@ public class Expression
 	
 	
 	
-	
 	public void controlType()
 	{
 		Type op1 = this.operandes.pop();

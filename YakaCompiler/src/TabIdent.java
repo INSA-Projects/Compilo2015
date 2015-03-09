@@ -30,7 +30,6 @@ public class TabIdent
 	 */
 	public boolean identExist (String key)
 	{
-		
 		return table.containsKey(key);
 	}
 	
@@ -44,6 +43,11 @@ public class TabIdent
 		table.put(key, id);
 	}
 	
+	/**
+	 * Get the type of the ident 
+	 * @param key
+	 * @return Type
+	 */
 	public Type getType (String key)
 	{
 		if (this.identExist(key)){
@@ -56,6 +60,11 @@ public class TabIdent
 		}
 	}
 	
+	/**
+	 * Get the value of the ident
+	 * @param key
+	 * @return int
+	 */
 	public int getValue (String key) {
 		if (identExist(key)) {
 			return findIdent(key).getValue();
