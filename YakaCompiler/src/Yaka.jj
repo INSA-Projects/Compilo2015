@@ -11,6 +11,7 @@ public class Yaka {
   public static TabIdent tabIdent;
   public static Expression expression;
   public static YVM yvm;
+  public static final String filename = "org.asm";
  
   public static void main(String args[]) { 
     Yaka analyseur;
@@ -132,7 +133,7 @@ TOKEN  :
 /**************************************/
 void prog() : {}
 {
-   <PROGRAMME> <ident>	
+   <PROGRAMME> {yvm.entete();} <ident>	
    bloc()
    <FPROGRAMME> 
 }
