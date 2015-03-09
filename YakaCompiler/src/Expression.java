@@ -15,6 +15,15 @@ public class Expression
 	private  Stack<Operateur> operators;
 	private  Stack<Type> operandes;
 	
+	public void pushOperande ( Type t){
+		operandes.push(t);
+	}
+	
+	public void pushOperator ( Operateur op){
+		operators.push(op);
+	}
+	
+	
 	
 	
 	public void controlType()
