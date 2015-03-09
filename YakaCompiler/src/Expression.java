@@ -28,10 +28,17 @@ public class Expression
 	
 	public void controlType()
 	{
+		Operateur michel = this.operators.pop();
 		Type op1 = this.operandes.pop();
-		Type op2 = this.operandes.pop();
+		if (michel.ordinal() == Operateur.NON.ordinal())
+		{
+			this.operandes.push(tabControl[3][op1.ordinal()]);
+			return;
+		}
 		
-		switch(this.operators.pop())
+		this.operandes.pop();
+		
+		switch(michel)
 		{
 		case PLUS:
 		case MOINS:
