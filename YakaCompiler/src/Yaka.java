@@ -96,6 +96,7 @@ public class Yaka implements YakaConstants {
 
   static final public void defConst() throws ParseException {
     jj_consume_token(ident);
+           declaration = new Declaration(YakaTokenManager.identLu);
     jj_consume_token(42);
     valConst();
   }
@@ -104,15 +105,19 @@ public class Yaka implements YakaConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case entier:
       jj_consume_token(entier);
+             declaration.setIdent( Type.ENTIER, YakaTokenManager.entierLu);
       break;
     case ident:
       jj_consume_token(ident);
+             declaration.setIdent(tabIdent.getType(YakaTokenManager.identLu), tabIdent.getValue(YakaTokenManager.identLu ));
       break;
     case VRAI:
       jj_consume_token(VRAI);
+             declaration.setIdent(Type.BOOLEEN, -1);
       break;
     case FAUX:
       jj_consume_token(FAUX);
+             declaration.setIdent(Type.BOOLEEN, 0);
       break;
     default:
       jj_la1[3] = jj_gen;
@@ -125,6 +130,7 @@ public class Yaka implements YakaConstants {
     jj_consume_token(VAR);
     type();
     jj_consume_token(ident);
+           declaration.setIdent(YakaTokenManager.identLu);
     label_4:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -137,6 +143,7 @@ public class Yaka implements YakaConstants {
       }
       jj_consume_token(40);
       jj_consume_token(ident);
+               declaration.setIdent(YakaTokenManager.identLu);
     }
     jj_consume_token(41);
   }
@@ -145,9 +152,11 @@ public class Yaka implements YakaConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case ENTIER:
       jj_consume_token(ENTIER);
+             declaration = new Declaration(Type.ENTIER);
       break;
     case BOOLEEN:
       jj_consume_token(BOOLEEN);
+              declaration = new Declaration(Type.BOOLEEN);
       break;
     default:
       jj_la1[5] = jj_gen;
