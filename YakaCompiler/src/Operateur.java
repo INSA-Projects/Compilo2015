@@ -13,5 +13,4 @@ public enum Operateur {
 	ET,
 	OU,
 	NON
-
 }

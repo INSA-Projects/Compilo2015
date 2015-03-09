@@ -25,7 +25,6 @@ public class Expression
 	
 	
 	
-	
 	public void controlType()
 	{
 		Operateur michel = this.operators.pop();

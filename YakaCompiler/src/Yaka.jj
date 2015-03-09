@@ -140,7 +140,7 @@ void prog() : {}
 void bloc() : {}{
  (declConst())*
  (declVar())*		
-   suiteExpr() 
+   suiteInstr() 
 }
 
 void declConst() : {}
@@ -181,10 +181,32 @@ void type() :{}
 /*
  * Syntaxe des instructions.
  */
-void suiteExpr() : {}
-{ (expression() (";" (expression())? )*)? }
+void suiteInstr() : {}
+{ 
+	instruction() (";" (instruction())? )* 
+}
 
+void instruction() : {}
+{
+	affectation() | lecture() | ecriture()
+}
 
+void affectation() : {}
+{
+	<ident> "=" expression()
+}
+
+void lecture() : {}
+{
+	"LIRE("<ident>")"
+}
+
+void ecriture() : {}
+{
+	"ECRIRE("(expression() | <chaine>)")" 
+	| "ALALIGNE"
+}
+	
 
 /*
  * Expression .
@@ -193,7 +215,7 @@ void expression() : {}
 {
   simpleExpr() 
   (opRel() 
-  simpleExpr() 
+  simpleExpr() {expression.controlType();}	
   )?
 }
 
@@ -203,61 +225,61 @@ void simpleExpr() : {}
 {
    terme() 
    (opAdd() 
-   terme()	
+   terme()	{expression.controlType();}	
    )*
 } 
 void terme() : {}
 {
   facteur() 
   (opMul() 
-  facteur()	
+  facteur()	{expression.controlType();}	
   )*
 }
 void facteur() : {}
 {   primaire() 
-  |  opNeg() primaire() 
+  |  opNeg() primaire() {expression.controlType();}	
 }
 
-void primaire (): {}
+void primaire(): {}
 {
-   valeur()
+   valeur() 
  | "(" expression() ")" 
  
 }
 
-void valeur () : {}
-{ <entier> 		
- | <ident> 		
- | <VRAI> 		
- | <FAUX> 		
+void valeur() : {}
+{ <entier> 	{expression.pushOperande(Type.ENTIER);}
+ | <ident> 	{expression.pushOperande(tabIdent.getType(YakaTokenManager.identLu));}	
+ | <VRAI> 	{expression.pushOperande(Type.BOOLEEN);}	
+ | <FAUX> 	{expression.pushOperande(Type.BOOLEEN);}	
  
 }
 
 void opRel() : {}
 {
-   "=" 		
- | "<>" 	
- | "<" 		
- | "<=" 	
- | ">" 		
- | ">=" 	
+   "=" 		{expression.pushOperator(Operateur.EG);}	
+ | "<>" 	{expression.pushOperator(Operateur.DIFF);}
+ | "<" 		{expression.pushOperator(Operateur.INF);}
+ | "<=" 	{expression.pushOperator(Operateur.INFEG);}
+ | ">" 		{expression.pushOperator(Operateur.SUP);}
+ | ">=" 	{expression.pushOperator(Operateur.SUPEG);}
 } 
 
 void opAdd() : {}
 {
-    "+"		
-  |  "-"  
-  | <OU> 	
+    "+"		{expression.pushOperator(Operateur.PLUS);}
+  |  "-"  	{expression.pushOperator(Operateur.MOINS);}
+  | <OU> 	{expression.pushOperator(Operateur.OU);}
 }
 
 void opMul() : {}
 {
-  "*"		
-  | "/"		
-  | <ET>	
+  "*"		{expression.pushOperator(Operateur.MULT);}
+  | "/"		{expression.pushOperator(Operateur.DIV);}
+  | <ET>	{expression.pushOperator(Operateur.ET);}
 } 
 
 void opNeg() : {}
-{ "-" 		
- | <NON>	
+{ "-" 		{expression.pushOperator(Operateur.MOINS);}
+ | <NON>	{expression.pushOperator(Operateur.NON);}
 }
