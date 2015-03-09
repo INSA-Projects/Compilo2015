@@ -3,6 +3,9 @@ import java.util.Stack;
 
 public class Expression 
 {
+	/**
+	 * Tableau des types de résultat
+	 */
 	private static final Type[][] tabControl = 
 	{		
 			{Type.ENTIER,Type.ERREUR,Type.ERREUR},
@@ -11,20 +14,49 @@ public class Expression
 			{Type.ERREUR,Type.BOOLEEN,Type.ERREUR}											
 	};
 	
+	/**
+	 * Type de la variable à affecter
+	 */
+	private Type typeIdentAffected;
+	
+	public void setIdentAffectedType(Type type) {
+		this.typeIdentAffected = type;
+	}
+	
+	public void controlTypeAffectation() {
+		Type type1 = operandes.pop();
+		if (type1 == typeIdentAffected) {
+			// Affectation correcte
+			return;
+		}
+		System.out.println("Erreur : deux types ne correspondent pas dans une affectation \n");
+		
+	}
+	
 	
 	private  Stack<Operateur> operators;
 	private  Stack<Type> operandes;
 	
+	/**
+	 * Push le type de l'opérande dans la pile operandes
+	 * @param t
+	 */
 	public void pushOperande ( Type t){
 		operandes.push(t);
 	}
 	
-	public void pushOperator ( Operateur op){
+	/**
+	 * Push l'opérateur dans la pile operators
+	 * @param op
+	 */
+	public void pushOperator (Operateur op){
 		operators.push(op);
 	}
 	
 	
-	
+	/**
+	 * Contrôle du type par l'opérateur Michel
+	 */
 	public void controlType()
 	{
 		Operateur michel = this.operators.pop();

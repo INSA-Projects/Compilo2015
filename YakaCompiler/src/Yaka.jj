@@ -193,7 +193,8 @@ void instruction() : {}
 
 void affectation() : {}
 {
-	<ident> "=" expression()
+	<ident> {expression.setIdentAffectedType(tabIdent.getType(YakaTokenManager.identLu));}
+	"=" expression(){expression.controlTypeAffectation();}
 }
 
 void lecture() : {}

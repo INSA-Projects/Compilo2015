@@ -216,8 +216,10 @@ public class Yaka implements YakaConstants {
 
   static final public void affectation() throws ParseException {
     jj_consume_token(ident);
+                 expression.setIdentAffectedType(tabIdent.getType(YakaTokenManager.identLu));
     jj_consume_token(42);
     expression();
+                         expression.controlTypeAffectation();
   }
 
   static final public void lecture() throws ParseException {
