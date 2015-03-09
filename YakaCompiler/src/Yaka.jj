@@ -98,7 +98,7 @@ TOKEN :
 | <FONCTION : "FONCTION">
 | <FFONCTION  : "FFONCTION">
 | <PROGRAMME : "PROGRAMME" >
-| <FPROGRAMME: "FPROGRAMME" >
+| <FPROGRAMME : "FPROGRAMME" >
 | <PRINCIPAL : "PRINCIPAL">
 | <FPRINCIPAL : "FPRINCIPAL">
 | <ALORS : "ALORS">
@@ -151,33 +151,32 @@ void declConst() : {}
 void defConst() : {}
 {
 	
-  <ident>  	  	
+  <ident> {declaration = new Declaration(YakaTokenManager.identLu);}	  	
    "=" valConst()
-    
 }
 
 void valConst() : {}{
-  <entier> 		
- | <ident>		
- | <VRAI> 		
- | <FAUX> 		
+  <entier>  {declaration.setIdent( Type.ENTIER, YakaTokenManager.entierLu);}
+ | <ident>  {declaration.setIdent(tabIdent.getType(YakaTokenManager.identLu), tabIdent.getValue(YakaTokenManager.identLu ));} 	
+ | <VRAI>   {declaration.setIdent(Type.BOOLEEN, -1);}		
+ | <FAUX>   {declaration.setIdent(Type.BOOLEEN, 0);}		
 }
 
 
 void declVar() : {}
 {
   <VAR> type()	
-  <ident>		
+  <ident> {declaration.setIdent(YakaTokenManager.identLu);}	
   ("," 
-      <ident>  
+      <ident> {declaration.setIdent(YakaTokenManager.identLu);}
   )* ";"
 	
 }
 
 void type() :{}
 {
-   <ENTIER> 			
- | <BOOLEEN>	
+   <ENTIER> {declaration = new Declaration(Type.ENTIER);}		
+ | <BOOLEEN> {declaration = new Declaration(Type.BOOLEEN);}	
 }
 /*
  * Syntaxe des instructions.

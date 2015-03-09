@@ -5,10 +5,10 @@ public class Expression
 {
 	private static final Type[][] tabControl = 
 	{		
-			{Type.ENTIER,Type.ERREUR},
-			{Type.BOOLEEN,Type.ERREUR},
-			{Type.BOOLEEN,Type.BOOLEEN},
-			{Type.ERREUR,Type.BOOLEEN}											
+			{Type.ENTIER,Type.ERREUR,Type.ERREUR},
+			{Type.BOOLEEN,Type.ERREUR,Type.ERREUR},
+			{Type.BOOLEEN,Type.BOOLEEN,Type.ERREUR},
+			{Type.ERREUR,Type.BOOLEEN,Type.ERREUR}											
 	};
 	
 	

@@ -10,5 +10,13 @@ public class Ident
 		this.value = value;
 	}
 	
+	public Type getType() {
+		return type;
+	}
+	
+	public int getValue() {
+		return this.value;
+	}
+	
 	
 }

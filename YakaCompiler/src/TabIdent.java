@@ -43,5 +43,29 @@ public class TabIdent
 	{
 		table.put(key, id);
 	}
+	
+	public Type getType (String key)
+	{
+		if (this.identExist(key)){
+			Ident ident = this.table.get(key);
+			return ident.getType();
+		}
+		else {
+			System.out.println("Erreur cet Ident n'existe pas dans la table des identificateurs \n");
+			return Type.ERREUR;
+		}
+	}
+	
+	public int getValue (String key) {
+		if (identExist(key)) {
+			return findIdent(key).getValue();
+		}
+		else {
+			System.out.println("Cet Ident n'est pas présent dans la table des identificateurs");
+		}
+		return -1;
+	}
 
 }
+
+
