@@ -224,7 +224,7 @@ public class Yaka implements YakaConstants {
 
   static final public void affectation() throws ParseException {
     jj_consume_token(ident);
-                 expression.setIdentAffectedType(tabIdent.getType(YakaTokenManager.identLu));
+                 expression.setIdentAffected(YakaTokenManager.identLu);
     jj_consume_token(42);
     expression();
                          expression.controlTypeAffectation();
@@ -233,6 +233,7 @@ public class Yaka implements YakaConstants {
   static final public void lecture() throws ParseException {
     jj_consume_token(43);
     jj_consume_token(ident);
+    yvm.lireEnt(YakaTokenManager.identLu);
     jj_consume_token(44);
   }
 
@@ -252,7 +253,7 @@ public class Yaka implements YakaConstants {
         break;
       case chaine:
         jj_consume_token(chaine);
-        yvm.ecrireChaine(YakaTokenManager.chaineLue);
+                                           yvm.ecrireChaine(YakaTokenManager.chaineLue);
         break;
       default:
         jj_la1[9] = jj_gen;
@@ -263,6 +264,7 @@ public class Yaka implements YakaConstants {
       break;
     case ALALIGNE:
       jj_consume_token(ALALIGNE);
+                      yvm.aLaLigne();
       break;
     default:
       jj_la1[10] = jj_gen;

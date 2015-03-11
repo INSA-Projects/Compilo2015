@@ -197,19 +197,21 @@ void instruction() : {}
 
 void affectation() : {}
 {
-	<ident> {expression.setIdentAffectedType(tabIdent.getType(YakaTokenManager.identLu));}
+	<ident> {expression.setIdentAffected(YakaTokenManager.identLu);}
 	"=" expression(){expression.controlTypeAffectation();}
 }
 
 void lecture() : {}
 {
-	"LIRE("<ident>")"
+	"LIRE("<ident>
+	{yvm.lireEnt(YakaTokenManager.identLu);}
+	")"
 }
 
 void ecriture() : {}
 {
 	"ECRIRE("(expression() | <chaine> {yvm.ecrireChaine(YakaTokenManager.chaineLue);})")" 
-	| "ALALIGNE"
+	| "ALALIGNE" {yvm.aLaLigne();}
 }
 	
 

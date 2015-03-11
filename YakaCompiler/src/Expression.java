@@ -17,17 +17,20 @@ public class Expression
 	/**
 	 * Type de la variable à affecter
 	 */
-	private Type typeIdentAffected;
-	private Operateur lastop;
 	
-	public void setIdentAffectedType(Type type) {
-		this.typeIdentAffected = type;
+	private Ident identAffected;
+	private String nomIdentAffected;
+	
+	public void setIdentAffected(String ident) {
+		this.identAffected = Yaka.tabIdent.findIdent(ident);
+		this.nomIdentAffected = ident;
 	}
 	
 	public void controlTypeAffectation() {
 		Type type1 = operandes.pop();
-		if (type1 == typeIdentAffected) {
+		if (type1 == this.identAffected.getType()) {
 			// Affectation correcte
+			Yaka.yvm.istore(Yaka.tabIdent.getValue(nomIdentAffected));
 			return;
 		}
 		System.out.println("Erreur : deux types ne correspondent pas dans une affectation \n");

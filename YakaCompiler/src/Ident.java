@@ -14,8 +14,16 @@ public class Ident
 		return type;
 	}
 	
+	public void setType(Type type) {
+		this.type = type;
+	}
+	
 	public int getValue() {
 		return this.value;
+	}
+	
+	public void setValue(int v) {
+		this.value = v;
 	}
 	
 	
