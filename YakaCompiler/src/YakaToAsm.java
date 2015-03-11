@@ -120,4 +120,32 @@ public class YakaToAsm extends YVM
 		this.write("iload "+value+"\n"
 				+ "\tpush word ptr [bp-"+value+"]\n"); 
 	}
+	
+	public void ecrireChaine(String chaine) {
+		write(";ecrireChaine \""+chaine+"\"\n"
+				+ ".DATA\n"
+				+ "\tmess1 DB \""+chaine+"$\"\n"
+				+ ".CODE\n"
+				+ "\tlea dx,mess1\n"
+				+ "\tpush dx\n"
+				+ "\tcall ecrch\n");
+	}
+	
+	public void aLaLigne(){
+		write(";aLaligne\n"
+				+ "\tcall ligsuiv\n");
+	}
+	
+	public void lireEnt(int nb){
+		write(";lireEnt -"+nb+"\n"
+				+ "\tlea dx,[bp-"+nb+"]\n"
+				+ "\tpush dx\n"
+				+ "\tcall lirent\n");
+	}
+	
+	public void ecrireEnt()
+	{
+		this.write(";ecrireEnt\n"
+				+ "\tcall ecrent\n");
+	}
 }

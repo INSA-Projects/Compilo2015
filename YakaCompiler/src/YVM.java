@@ -70,4 +70,18 @@ public class YVM
 	public void ecrireChaine(String chaine) {
 		Ecriture.ecrireString(Yaka.YVMfilename, "ecrireChaine \""+chaine+"\"\n");
 	}
+	
+	public void aLaLigne(){
+		Ecriture.ecrireString(Yaka.YVMfilename, "aLaLine\n");
+	}
+	
+	public void lireEnt(int nb){
+		Ecriture.ecrireString(Yaka.YVMfilename, "lireEnt -"+nb+"\n");
+	}
+	
+	public void ecrireEnt(){
+		Ecriture.ecrireString(Yaka.YVMfilename, "ecrireEnt\n");
+	}
+	
 }
+
