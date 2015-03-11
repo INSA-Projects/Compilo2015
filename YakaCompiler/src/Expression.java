@@ -18,6 +18,7 @@ public class Expression
 	 * Type de la variable à affecter
 	 */
 	private Type typeIdentAffected;
+	private Operateur lastop;
 	
 	public void setIdentAffectedType(Type type) {
 		this.typeIdentAffected = type;
@@ -30,7 +31,6 @@ public class Expression
 			return;
 		}
 		System.out.println("Erreur : deux types ne correspondent pas dans une affectation \n");
-		
 	}
 	
 	
@@ -61,6 +61,7 @@ public class Expression
 	{
 		Operateur operator = this.operators.pop();
 		Type op1 = this.operandes.pop();
+		
 		if (operator.ordinal() == Operateur.NON.ordinal())
 		{
 			this.operandes.push(tabControl[3][op1.ordinal()]);
@@ -72,9 +73,13 @@ public class Expression
 		switch(operator)
 		{
 		case PLUS:
+			Yaka.yvm.iadd();
 		case MOINS:
+			Yaka.yvm.isub();
 		case MULT:
+			Yaka.yvm.imul();
 		case DIV:
+			Yaka.yvm.idiv();
 			this.operandes.push(tabControl[0][op1.ordinal()]);
 			break;
 			

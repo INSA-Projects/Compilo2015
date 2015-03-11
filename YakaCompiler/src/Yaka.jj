@@ -11,8 +11,8 @@ public class Yaka {
   public static TabIdent tabIdent;
   public static Expression expression;
   public static YVM yvm;
-  public static final String ASMfilename = "org.asm";
-  public static final String YVMfilename = "code.yvm";
+  public static String ASMfilename;
+  public static String YVMfilename;
  
   public static void main(String args[]) { 
     Yaka analyseur;
@@ -134,20 +134,22 @@ TOKEN  :
 /**************************************/
 void prog() : {}
 {
-   <PROGRAMME> {yvm.entete();} <ident>	
+   <PROGRAMME> {yvm.entete();} <ident> {YVMfilename = YakaTokenManager.identLu;}	
    bloc()
-   <FPROGRAMME> 
+   <FPROGRAMME> {yvm.queue();}
 }
 
 void bloc() : {}{
  (declConst())*
- (declVar())*		
+ (declVar())*
+ {yvm.ouvrePrinc();}
    suiteInstr() 
 }
 
 void declConst() : {}
 {
-  <CONST>  defConst() ( "," defConst())* ";"
+  <CONST>  defConst() {yvm.alloc();}
+  	( "," defConst() {yvm.alloc();} )* ";"
 }
 
 void defConst() : {}
@@ -206,7 +208,7 @@ void lecture() : {}
 
 void ecriture() : {}
 {
-	"ECRIRE("(expression() | <chaine>)")" 
+	"ECRIRE("(expression() | <chaine> {yvm.ecrireChaine();})")" 
 	| "ALALIGNE"
 }
 	
@@ -235,7 +237,8 @@ void terme() : {}
 {
   facteur() 
   (opMul() 
-  facteur()	{expression.controlType();}	
+  facteur()	{expression.controlType();
+  		 yvm.add(expression.)}	
   )*
 }
 void facteur() : {}
@@ -251,10 +254,14 @@ void primaire(): {}
 }
 
 void valeur() : {}
-{ <entier> 	{expression.pushOperande(Type.ENTIER);}
- | <ident> 	{expression.pushOperande(tabIdent.getType(YakaTokenManager.identLu));}	
- | <VRAI> 	{expression.pushOperande(Type.BOOLEEN);}	
- | <FAUX> 	{expression.pushOperande(Type.BOOLEEN);}	
+{ <entier> 	{expression.pushOperande(Type.ENTIER);
+		 yvm.iconst(YakaTokenManager.entierLu);}
+ | <ident> 	{expression.pushOperande(tabIdent.getType(YakaTokenManager.identLu));
+ 		 yvm.iload(tabIdent.getValue(YakaTokenManager.identLu));}	
+ | <VRAI> 	{expression.pushOperande(Type.BOOLEEN);
+ 		 yvm.iconst(-1);}	
+ | <FAUX> 	{expression.pushOperande(Type.BOOLEEN);
+ 		 yvm.iconst(0);}	
  
 }
 
