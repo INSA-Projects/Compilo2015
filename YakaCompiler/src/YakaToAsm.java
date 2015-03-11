@@ -114,4 +114,10 @@ public class YakaToAsm extends YVM
 				+ "\tor ax,bx\n"
 				+ "\tpush ax\n");
 	}
+	
+	public void iload(int value)
+	{
+		this.write("iload "+value+"\n"
+				+ "\tpush word ptr [bp-"+value+"]\n");
+	}
 }
