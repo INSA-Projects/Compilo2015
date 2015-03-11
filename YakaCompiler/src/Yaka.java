@@ -4,6 +4,8 @@ public class Yaka implements YakaConstants {
   public static TabIdent tabIdent;
   public static Expression expression;
   public static YVM yvm;
+  public static final String ASMfilename = "org.asm";
+  public static final String YVMfilename = "code.yvm";
 
   public static void main(String args[]) {
     Yaka analyseur;
@@ -42,6 +44,7 @@ public class Yaka implements YakaConstants {
 /**************************************/
   static final public void prog() throws ParseException {
     jj_consume_token(PROGRAMME);
+                yvm.entete();
     jj_consume_token(ident);
     bloc();
     jj_consume_token(FPROGRAMME);

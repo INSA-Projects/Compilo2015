@@ -11,7 +11,8 @@ public class Yaka {
   public static TabIdent tabIdent;
   public static Expression expression;
   public static YVM yvm;
-  public static final String filename = "org.asm";
+  public static final String ASMfilename = "org.asm";
+  public static final String YVMfilename = "code.yvm";
  
   public static void main(String args[]) { 
     Yaka analyseur;

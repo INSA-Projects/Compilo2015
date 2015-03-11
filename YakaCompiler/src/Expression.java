@@ -55,13 +55,13 @@ public class Expression
 	
 	
 	/**
-	 * Contrôle du type par l'opérateur Michel
+	 * Contrôle du type sur l'opérateur operator
 	 */
 	public void controlType()
 	{
-		Operateur michel = this.operators.pop();
+		Operateur operator = this.operators.pop();
 		Type op1 = this.operandes.pop();
-		if (michel.ordinal() == Operateur.NON.ordinal())
+		if (operator.ordinal() == Operateur.NON.ordinal())
 		{
 			this.operandes.push(tabControl[3][op1.ordinal()]);
 			return;
@@ -69,7 +69,7 @@ public class Expression
 		
 		this.operandes.pop();
 		
-		switch(michel)
+		switch(operator)
 		{
 		case PLUS:
 		case MOINS:
