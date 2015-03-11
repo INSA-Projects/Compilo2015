@@ -4,8 +4,8 @@ public class Yaka implements YakaConstants {
   public static TabIdent tabIdent;
   public static Expression expression;
   public static YVM yvm;
-  public static final String ASMfilename = "org.asm";
-  public static final String YVMfilename = "code.yvm";
+  public static String ASMfilename;
+  public static String YVMfilename;
 
   public static void main(String args[]) {
     Yaka analyseur;
@@ -46,8 +46,10 @@ public class Yaka implements YakaConstants {
     jj_consume_token(PROGRAMME);
                 yvm.entete();
     jj_consume_token(ident);
+                                        YVMfilename = YakaTokenManager.identLu;
     bloc();
     jj_consume_token(FPROGRAMME);
+                 yvm.queue();
   }
 
   static final public void bloc() throws ParseException {
@@ -75,12 +77,14 @@ public class Yaka implements YakaConstants {
       }
       declVar();
     }
+  yvm.ouvrePrinc();
     suiteInstr();
   }
 
   static final public void declConst() throws ParseException {
     jj_consume_token(CONST);
     defConst();
+                       yvm.alloc();
     label_3:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -93,6 +97,7 @@ public class Yaka implements YakaConstants {
       }
       jj_consume_token(40);
       defConst();
+                          yvm.alloc();
     }
     jj_consume_token(41);
   }
@@ -247,6 +252,7 @@ public class Yaka implements YakaConstants {
         break;
       case chaine:
         jj_consume_token(chaine);
+        yvm.ecrireChaine(YakaTokenManager.chaineLue);
         break;
       default:
         jj_la1[9] = jj_gen;
@@ -374,18 +380,22 @@ public class Yaka implements YakaConstants {
     case entier:
       jj_consume_token(entier);
                  expression.pushOperande(Type.ENTIER);
+                 yvm.iconst(YakaTokenManager.entierLu);
       break;
     case ident:
       jj_consume_token(ident);
                  expression.pushOperande(tabIdent.getType(YakaTokenManager.identLu));
+                 yvm.iload(tabIdent.getValue(YakaTokenManager.identLu));
       break;
     case VRAI:
       jj_consume_token(VRAI);
                  expression.pushOperande(Type.BOOLEEN);
+                 yvm.iconst(-1);
       break;
     case FAUX:
       jj_consume_token(FAUX);
                  expression.pushOperande(Type.BOOLEEN);
+                 yvm.iconst(0);
       break;
     default:
       jj_la1[16] = jj_gen;

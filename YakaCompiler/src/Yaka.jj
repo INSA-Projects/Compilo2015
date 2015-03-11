@@ -208,7 +208,7 @@ void lecture() : {}
 
 void ecriture() : {}
 {
-	"ECRIRE("(expression() | <chaine> {yvm.ecrireChaine();})")" 
+	"ECRIRE("(expression() | <chaine> {yvm.ecrireChaine(YakaTokenManager.chaineLue);})")" 
 	| "ALALIGNE"
 }
 	
@@ -237,8 +237,7 @@ void terme() : {}
 {
   facteur() 
   (opMul() 
-  facteur()	{expression.controlType();
-  		 yvm.add(expression.)}	
+  facteur()	{expression.controlType();}	
   )*
 }
 void facteur() : {}

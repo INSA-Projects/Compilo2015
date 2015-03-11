@@ -8,7 +8,6 @@ public class YVM
 		this.allocatedMemory += 2;
 	}
 	
-	
 	public void entete()
 	{
 		Ecriture.ecrireString(Yaka.YVMfilename, "entete\n");
@@ -62,5 +61,13 @@ public class YVM
 	public void ior()
 	{
 		Ecriture.ecrireString(Yaka.YVMfilename, "ior\n");
+	}
+	
+	public void iload(int offset) {
+		Ecriture.ecrireString(Yaka.YVMfilename, "iload "+offset+"\n");
+	}
+	
+	public void ecrireChaine(String chaine) {
+		Ecriture.ecrireString(Yaka.YVMfilename, "ecrireChaine \""+chaine+"\"\n");
 	}
 }
