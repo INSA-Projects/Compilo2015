@@ -36,7 +36,7 @@ public class YakaToAsm extends YVM
 	
 	public void queue()
 	{
-		this.write("\t; queue\n"
+		this.write("; queue\n"
 				+ "\tnop\n"
 				+ "\tEXITCODE\n"
 				+ "\tEND debut\n");
@@ -44,27 +44,27 @@ public class YakaToAsm extends YVM
 	
 	public void ouvrePrinc()
 	{
-		this.write("\t; ouvrePrinc "+this.allocatedMemory+"\n"
+		this.write("; ouvrePrinc "+this.allocatedMemory+"\n"
 				+ "\tmov bp,sp\n"
 				+ "\tsub sp,"+this.allocatedMemory+"\n");
 	}
 	
 	public void iconst(int value)
 	{
-		this.write("\t; iconst "+value+"\n"
+		this.write("; iconst "+value+"\n"
 				+ "\tpush word ptr "+value+"\n");
 	}
 	
 	public void istore(int value)
 	{
-		this.write("\t; istore "+value+"\n"
+		this.write("; istore "+value+"\n"
 				+ "\tpop ax\n"
 				+ "\tmov word ptr [bp"+value+"],ax\n");
 	}
 
 	public void iadd ()
 	{
-		this.write("\t; iadd\n"
+		this.write("; iadd\n"
 				+ "\tpop bx\n"
 				+ "\tpop ax\n"
 				+ "\tadd ax,bx\n"
@@ -73,7 +73,7 @@ public class YakaToAsm extends YVM
 	
 	public void isub()
 	{
-		this.write("\t; isub\n"
+		this.write("; isub\n"
 				+ "\tpop bx\n"
 				+ "\tpop ax\n"
 				+ "\tsub ax,bx\n"
@@ -82,7 +82,7 @@ public class YakaToAsm extends YVM
 	
 	public void imul()
 	{
-		this.write("\t; imul\n"
+		this.write("; imul\n"
 				+ "\tpop bx\n"
 				+ "\tpop ax\n"
 				+ "\timul bx\n"
@@ -91,7 +91,7 @@ public class YakaToAsm extends YVM
 	
 	public void idiv()
 	{
-		this.write("\t; idiv\n"
+		this.write("; idiv\n"
 				+ "\tpop bx\n"
 				+ "\tpop ax\n"
 				+ "\tcwd\n"
@@ -101,7 +101,7 @@ public class YakaToAsm extends YVM
 	
 	public void idiff() 
 	{
-		this.write("\t; idiff\n"
+		this.write("; idiff\n"
 				+ "\t - to do - \n");
 	}
 	
@@ -162,15 +162,16 @@ public class YakaToAsm extends YVM
 	
 	public void iload(int value)
 	{
-		this.write("\t; iload "+value+"\n"
+		this.write("; iload "+value+"\n"
 				+ "\tpush word ptr [bp"+value+"]\n"); 
 	}
 	
 	public void ecrireChaine(String chaine) {
 		write("; ecrireChaine "+chaine+"\n"
 				+ ".DATA\n");
-		chaine += "$";
-		write("\tmess"+this.cptMess+" DB "+chaine+"=$\n"
+		String tmp = chaine.substring(0,chaine.length()-1);
+		chaine = tmp + "$\"";
+		write("mess"+this.cptMess+" DB "+chaine+"\n"
 				+ ".CODE\n"
 				+ "\tlea dx,mess"+this.cptMess+"\n"
 				+ "\tpush dx\n"
@@ -179,12 +180,12 @@ public class YakaToAsm extends YVM
 	}
 	
 	public void aLaLigne(){
-		write("\t; aLaligne\n"
+		write("; aLaligne\n"
 				+ "\tcall ligsuiv\n");
 	}
 	
 	public void lireEnt(int nb){
-		write("\t; lireEnt "+nb+"\n"
+		write("; lireEnt "+nb+"\n"
 				+ "\tlea dx,[bp"+nb+"]\n"
 				+ "\tpush dx\n"
 				+ "\tcall lirent\n");
@@ -192,7 +193,7 @@ public class YakaToAsm extends YVM
 	
 	public void ecrireEnt()
 	{
-		this.write("\t; ecrireEnt\n"
+		this.write("; ecrireEnt\n"
 				+ "\tcall ecrent\n");
 	}
 }
