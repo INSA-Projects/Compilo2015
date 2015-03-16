@@ -52,7 +52,7 @@ public class YakaToAsm extends YVM
 	public void iconst(int value)
 	{
 		this.write("; iconst "+value+"\n"
-				+ "\tpush word ptr "+value+"\n");
+				+ "\tpush "+value+"\n");
 	}
 	
 	public void istore(int value)
@@ -101,63 +101,108 @@ public class YakaToAsm extends YVM
 	
 	public void idiff() 
 	{
-		this.write("; idiff\n"
-				+ "\t - to do - \n");
+		write(";idiff\n"
+				+ "\tpop bx\n" 
+				+ "\tpop ax\n" 
+				+ "\tcmp ax, bx\n" 
+				+ "\tje $+6\n" 
+				+ "\tpush -1\n" 
+				+ "\tjmp $+4\n" 
+				+ "\tpush 0\n\n"); 
 	}
 	
 	public void ineg()
 	{
 		write(";ineg\n"
-				+ "\t - to do - \n");
-		
+				+ "pop ax\n"
+				+ "neg ax\n"
+				+ "push ax\n");
 	}
 	
 	public void iinf()
 	{
 		write(";iinf\n"
-				+ "\t - to do - \n");
+				+ "\tpop bx\n" 
+				+ "\tpop ax\n" 
+				+ "\tcmp ax, bx\n" 
+				+ "\tjge $+6\n" 
+				+ "\tpush -1\n" 
+				+ "jmp $+4\n" 
+				+ "push 0\n\n"); 
 	}
 	
 	public void iinfegal()
 	{
-		this.write(";iinfegal\n"
-				+ "\t - to do - \n");
+		write(";iinf\n"
+				+ "\tpop bx\n" 
+				+ "\tpop ax\n" 
+				+ "\tcmp ax, bx\n" 
+				+ "\tjg $+6\n" 
+				+ "\tpush -1\n" 
+				+ "\tjmp $+4\n" 
+				+ "\tpush 0\n\n"); 
 	}
 	
 	public void isup()
 	{
 		write(";isup\n"
-				+ "\t - to do - \n");
+				+ "\tpop bx\n" 
+				+ "\tpop ax\n" 
+				+ "\tcmp ax, bx\n" 
+				+ "\tjle $+6\n" 
+				+ "\tpush -1\n" 
+				+ "\tjmp $+4\n" 
+				+ "\tpush 0\n\n"); 
 	}
 	
 	public void isupegal()
 	{
-		write(";isupegal\n"
-				+ "\t - to do - \n");
+		write(";isup\n"
+				+ "\tpop bx\n" 
+				+ "\tpop ax\n" 
+				+ "\tcmp ax, bx\n" 
+				+ "\tjl $+6\n" 
+				+ "\tpush -1\n" 
+				+ "\tjmp $+4\n" 
+				+ "\tpush 0\n\n"); 
 	}
 	
 	public void ior()
 	{
-		this.write(";ior\n"
-				+ "\t - to do - \n");
+		write(";ior\n"
+				+ "\tpop ax\n" 
+				+ "\tpop bx\n" 
+				+ "\tor ax, bx\n" 
+				+ "\tpush ax\n\n"); 
 	}
 	
 	public void iand()
 	{
 		write(";iand\n"
-				+ "\t - to do - \n");
+				+ "\tpop ax\n" 
+				+ "\tpop bx\n" 
+				+ "\tand ax, bx\n" 
+				+ "\tpush ax\n\n"); 
 	}
 	
 	public void inot()
 	{
 		write(";inot\n"
-				+ "\t - to do - \n");
+				+ "\t pop ax"
+				+ "\t not ax \n"
+				+ "push ax \n");
 	}
 	
 	public void iegal()
 	{
 		write(";iegal\n"
-				+ "\t - to do - \n");
+				+ "\tpop bx\n" 
+				+ "\tpop ax\n" 
+				+ "\tcmp ax, bx\n" 
+				+ "\tjne $+6\n" 
+				+ "\tpush -1\n" 
+				+ "\tjmp $+4\n" 
+				+ "\tpush 0\n\n"); 
 	}
 	
 	public void iload(int value)

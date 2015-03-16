@@ -34,7 +34,7 @@ public class Yaka implements YakaConstants {
     try {
       analyseur = new Yaka(input);
       analyseur.prog();
-      System.out.println("Analyse synaxique r\u00e9ussie !");
+      System.out.println("Analyse syntaxique r\u00e9ussie !");
     } catch (ParseException e) {
       String msg = e.getMessage();
       msg = msg.substring(0,msg.indexOf("\n"));
@@ -86,7 +86,6 @@ public class Yaka implements YakaConstants {
   static final public void declConst() throws ParseException {
     jj_consume_token(CONST);
     defConst();
-                       yvm.alloc();
     label_3:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -99,7 +98,6 @@ public class Yaka implements YakaConstants {
       }
       jj_consume_token(40);
       defConst();
-                          yvm.alloc();
     }
     jj_consume_token(41);
   }
@@ -390,7 +388,7 @@ public class Yaka implements YakaConstants {
     case ident:
       jj_consume_token(ident);
                  expression.pushOperande(tabIdent.getType(YakaTokenManager.identLu));
-                 yvm.iload(tabIdent.getValue(YakaTokenManager.identLu));
+                 expression.accedeIdent(YakaTokenManager.identLu);
       break;
     case VRAI:
       jj_consume_token(VRAI);

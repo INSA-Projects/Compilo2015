@@ -151,8 +151,8 @@ void bloc() : {}{
 
 void declConst() : {}
 {
-  <CONST>  defConst() {yvm.alloc();}
-  	( "," defConst() {yvm.alloc();} )* ";"
+  <CONST>  defConst() 
+  	( "," defConst() )* ";"
 }
 
 void defConst() : {}
@@ -261,7 +261,7 @@ void valeur() : {}
 { <entier> 	{expression.pushOperande(Type.ENTIER);
 		 yvm.iconst(YakaTokenManager.entierLu);}
  | <ident> 	{expression.pushOperande(tabIdent.getType(YakaTokenManager.identLu));
- 		 yvm.iload(tabIdent.getValue(YakaTokenManager.identLu));}	
+ 		 expression.accedeIdent(YakaTokenManager.identLu);}	
  | <VRAI> 	{expression.pushOperande(Type.BOOLEEN);
  		 yvm.iconst(-1);}	
  | <FAUX> 	{expression.pushOperande(Type.BOOLEEN);

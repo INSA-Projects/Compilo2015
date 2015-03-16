@@ -40,6 +40,10 @@ public class TabIdent
 	 */
 	public void putIdent (String key, Ident id)
 	{
+		if (identExist(key)) {
+			System.out.println("Ident : "+key+" Erreur cet Ident existe déjà dans la table des identificateurs ligne"+SimpleCharStream.getEndLine()+"\n");
+			return;
+		}
 		table.put(key, id);
 	}
 	
@@ -55,7 +59,7 @@ public class TabIdent
 			return ident.getType();
 		}
 		else {
-			System.out.println("Erreur cet Ident n'existe pas dans la table des identificateurs \n");
+			System.out.println("Ident : "+key+" Erreur cet Ident n'existe pas dans la table des identificateurs ligne "+SimpleCharStream.getEndLine()+"\n");
 			return Type.ERREUR;
 		}
 	}
@@ -70,9 +74,9 @@ public class TabIdent
 			return findIdent(key).getValue();
 		}
 		else {
-			System.out.println("Cet Ident n'est pas présent dans la table des identificateurs");
-		}
-		return -1;
+			System.out.println("Ident : "+key+" Erreur cet Ident n'existe pas dans la table des identificateurs ligne "+SimpleCharStream.getEndLine()+"\n");
+			return -1;
+		}	
 	}
 
 }

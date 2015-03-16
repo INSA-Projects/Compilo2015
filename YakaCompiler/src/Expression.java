@@ -26,6 +26,10 @@ public class Expression
 	
 	public void setIdentAffected(String ident) {
 		this.identAffected = Yaka.tabIdent.findIdent(ident);
+		if (this.identAffected instanceof IdConst) {
+			System.out.println("Erreur : "+ident+" n'est pas une variable ligne "+SimpleCharStream.getEndLine()+"\n");
+		}
+		
 		this.nomIdentAffected = ident;
 	}
 	
@@ -36,7 +40,7 @@ public class Expression
 			Yaka.yvm.istore(Yaka.tabIdent.getValue(nomIdentAffected));
 			return;
 		}
-		System.out.println("Erreur : deux types ne correspondent pas dans une affectation \n");
+		System.out.println("\nErreur : deux types ne correspondent pas dans une affectation ligne "+SimpleCharStream.getEndLine()+"\n");
 	}
 	
 	public Expression(){
@@ -65,6 +69,16 @@ public class Expression
 	}
 	
 	
+	public void accedeIdent(String s) {
+		Ident id = Yaka.tabIdent.findIdent(s);
+		if (id instanceof IdConst) {
+			Yaka.yvm.iconst(Yaka.tabIdent.getValue(YakaTokenManager.identLu));
+		}
+		else {
+			Yaka.yvm.iload(Yaka.tabIdent.getValue(YakaTokenManager.identLu));
+		}
+	}
+	
 	/**
 	 * Contrôle du type sur l'opérateur operator
 	 */
@@ -75,7 +89,21 @@ public class Expression
 		Type operande = this.operandes.pop();
 		
 		// pop la deuxieme operande
-		this.operandes.pop();
+		// Seulement dans le cas d'une opération binaire
+		
+		System.out.println("type op :"+operator);
+		System.out.println("type operande1 :"+operande);
+		
+		if (!(operator.ordinal() == Operateur.NEG.ordinal() || operator.ordinal() == Operateur.NON.ordinal())) {
+			Type tmp = this.operandes.pop();
+			// En Yaka on suppose les deux opérandes de même type
+			System.out.println("type operande1 :"+tmp);
+			if (tmp!=operande) {
+				System.out.println("\nErreur : opération entre deux types différents \n");
+				this.operandes.push(Type.ERREUR);
+				return;
+			}
+		}
 		
 		switch(operator)
 		{
@@ -138,7 +166,7 @@ public class Expression
 			
 		// Opérations unaires
 		case NEG :
-			this.operandes.push(tabControl[5][operande.ordinal()]);
+			this.operandes.push(tabControl[4][operande.ordinal()]);
 			Yaka.yvm.ineg();
 			break;
 		case NON :
