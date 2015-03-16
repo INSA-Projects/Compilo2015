@@ -173,9 +173,9 @@ void valConst() : {}{
 void declVar() : {}
 {
   <VAR> type()	
-  <ident> {declaration.setIdent(YakaTokenManager.identLu);}	
+  <ident> {declaration.setIdent(YakaTokenManager.identLu);yvm.alloc();}	
   ("," 
-      <ident> {declaration.setIdent(YakaTokenManager.identLu);}
+      <ident> {declaration.setIdent(YakaTokenManager.identLu);yvm.alloc();}
   )* ";"
 	
 }
@@ -213,7 +213,7 @@ void lecture() : {}
 
 void ecriture() : {}
 {
-	"ECRIRE("(expression() | <chaine> {yvm.ecrireChaine(YakaTokenManager.chaineLue);})")" 
+	"ECRIRE("(expression() {yvm.ecrireEnt();}| <chaine> {yvm.ecrireChaine(YakaTokenManager.chaineLue);})")" 
 	| "ALALIGNE" {yvm.aLaLigne();}
 }
 	

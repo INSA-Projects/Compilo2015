@@ -140,7 +140,7 @@ public class Yaka implements YakaConstants {
     jj_consume_token(VAR);
     type();
     jj_consume_token(ident);
-           declaration.setIdent(YakaTokenManager.identLu);
+           declaration.setIdent(YakaTokenManager.identLu);yvm.alloc();
     label_4:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -153,7 +153,7 @@ public class Yaka implements YakaConstants {
       }
       jj_consume_token(40);
       jj_consume_token(ident);
-               declaration.setIdent(YakaTokenManager.identLu);
+               declaration.setIdent(YakaTokenManager.identLu);yvm.alloc();
     }
     jj_consume_token(41);
   }
@@ -252,10 +252,11 @@ public class Yaka implements YakaConstants {
       case 46:
       case 53:
         expression();
+                                yvm.ecrireEnt();
         break;
       case chaine:
         jj_consume_token(chaine);
-                                           yvm.ecrireChaine(YakaTokenManager.chaineLue);
+                                                             yvm.ecrireChaine(YakaTokenManager.chaineLue);
         break;
       default:
         jj_la1[9] = jj_gen;
@@ -333,6 +334,7 @@ public class Yaka implements YakaConstants {
       }
       opMul();
       facteur();
+                 expression.controlType();
     }
   }
 
@@ -349,6 +351,7 @@ public class Yaka implements YakaConstants {
     case 53:
       opNeg();
       primaire();
+                         expression.controlType();
       break;
     default:
       jj_la1[14] = jj_gen;
@@ -485,7 +488,7 @@ public class Yaka implements YakaConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case 53:
       jj_consume_token(53);
-                 expression.pushOperator(Operateur.MOINS);
+                 expression.pushOperator(Operateur.NEG);
       break;
     case NON:
       jj_consume_token(NON);
