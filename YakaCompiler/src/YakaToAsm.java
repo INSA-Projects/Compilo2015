@@ -2,6 +2,8 @@
 public class YakaToAsm extends YVM
 {
 	
+	private int cptMess;
+	
 	private void write (String s){
 		Ecriture.ecrireString(Yaka.ASMfilename, "\t"+s);
 	}
@@ -21,7 +23,10 @@ public class YakaToAsm extends YVM
 	
 	public void entete()
 	{
-		Ecriture.ecrireString(Yaka.ASMfilename, ";entete\n"
+		Ecriture.ecrireString(Yaka.ASMfilename, "\t; entete\n"
+				+ "\textrn lirent:proc, ecrent:proc\n"
+				+ "\textrn ecrbool:proc\n"
+				+ "\textrn ecrch:proc, ligsuiv:proc\n"
 				+ ".model SMALL\n"
 				+ ".586\n"
 				+ ".CODE\n"
@@ -31,35 +36,35 @@ public class YakaToAsm extends YVM
 	
 	public void queue()
 	{
-		this.write(";queue\n"
+		this.write("\t; queue\n"
 				+ "\tnop\n"
-				+ "\texitcode\n"
-				+ "\tend debut\n");
+				+ "\tEXITCODE\n"
+				+ "\tEND debut\n");
 	}
 	
 	public void ouvrePrinc()
 	{
-		this.write(";ouvrePrinc"+this.allocatedMemory+"\n"
+		this.write("\t; ouvrePrinc "+this.allocatedMemory+"\n"
 				+ "\tmov bp,sp\n"
 				+ "\tsub sp,"+this.allocatedMemory+"\n");
 	}
 	
 	public void iconst(int value)
 	{
-		this.write(";iconst "+value+"\n"
-				+ "\tpush "+value+"\n");
+		this.write("\t; iconst "+value+"\n"
+				+ "\tpush word ptr "+value+"\n");
 	}
 	
 	public void istore(int value)
 	{
-		this.write(";istore "+value+"\n"
+		this.write("\t; istore "+value+"\n"
 				+ "\tpop ax\n"
-				+ "\tmov word ptr [bp-"+value+"],ax\n");
+				+ "\tmov word ptr [bp"+value+"],ax\n");
 	}
 
 	public void iadd ()
 	{
-		this.write(";iadd\n"
+		this.write("\t; iadd\n"
 				+ "\tpop bx\n"
 				+ "\tpop ax\n"
 				+ "\tadd ax,bx\n"
@@ -68,7 +73,7 @@ public class YakaToAsm extends YVM
 	
 	public void isub()
 	{
-		this.write(";isub\n"
+		this.write("\t; isub\n"
 				+ "\tpop bx\n"
 				+ "\tpop ax\n"
 				+ "\tsub ax,bx\n"
@@ -77,7 +82,7 @@ public class YakaToAsm extends YVM
 	
 	public void imul()
 	{
-		this.write(";imul\n"
+		this.write("\t; imul\n"
 				+ "\tpop bx\n"
 				+ "\tpop ax\n"
 				+ "\timul bx\n"
@@ -86,7 +91,7 @@ public class YakaToAsm extends YVM
 	
 	public void idiv()
 	{
-		this.write(";idiv\n"
+		this.write("\t; idiv\n"
 				+ "\tpop bx\n"
 				+ "\tpop ax\n"
 				+ "\tcwd\n"
@@ -96,7 +101,7 @@ public class YakaToAsm extends YVM
 	
 	public void idiff() 
 	{
-		this.write(";idiff\n"
+		this.write("\t; idiff\n"
 				+ "\t - to do - \n");
 	}
 	
@@ -116,13 +121,7 @@ public class YakaToAsm extends YVM
 	public void iinfegal()
 	{
 		this.write(";iinfegal\n"
-				+ "\tpop bx\n"
-				+ "\tpop ax\n"
-				+ "\tcmp ax,bx\n"
-				+ "\tjg $+6\n"
-				+ "\tpush -1\n"
-				+ "\tjmp $+4\n"
-				+ "\tpush 0\n");
+				+ "\t - to do - \n");
 	}
 	
 	public void isup()
@@ -140,10 +139,7 @@ public class YakaToAsm extends YVM
 	public void ior()
 	{
 		this.write(";ior\n"
-				+ "\tpop bx\n"
-				+ "\tpop ax\n"
-				+ "\tor ax,bx\n"
-				+ "\tpush ax\n");
+				+ "\t - to do - \n");
 	}
 	
 	public void iand()
@@ -166,35 +162,37 @@ public class YakaToAsm extends YVM
 	
 	public void iload(int value)
 	{
-		this.write("iload "+value+"\n"
-				+ "\tpush word ptr [bp-"+value+"]\n"); 
+		this.write("\t; iload "+value+"\n"
+				+ "\tpush word ptr [bp"+value+"]\n"); 
 	}
 	
 	public void ecrireChaine(String chaine) {
-		write(";ecrireChaine \""+chaine+"\"\n"
-				+ ".DATA\n"
-				+ "\tmess1 DB \""+chaine+"$\"\n"
+		write("; ecrireChaine "+chaine+"\n"
+				+ ".DATA\n");
+		chaine += "$";
+		write("\tmess"+this.cptMess+" DB "+chaine+"=$\n"
 				+ ".CODE\n"
-				+ "\tlea dx,mess1\n"
+				+ "\tlea dx,mess"+this.cptMess+"\n"
 				+ "\tpush dx\n"
 				+ "\tcall ecrch\n");
+		this.cptMess++;
 	}
 	
 	public void aLaLigne(){
-		write(";aLaligne\n"
+		write("\t; aLaligne\n"
 				+ "\tcall ligsuiv\n");
 	}
 	
 	public void lireEnt(int nb){
-		write(";lireEnt -"+nb+"\n"
-				+ "\tlea dx,[bp-"+nb+"]\n"
+		write("\t; lireEnt "+nb+"\n"
+				+ "\tlea dx,[bp"+nb+"]\n"
 				+ "\tpush dx\n"
 				+ "\tcall lirent\n");
 	}
 	
 	public void ecrireEnt()
 	{
-		this.write(";ecrireEnt\n"
+		this.write("\t; ecrireEnt\n"
 				+ "\tcall ecrent\n");
 	}
 }
