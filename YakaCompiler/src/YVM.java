@@ -88,6 +88,10 @@ public class YVM
 		Ecriture.ecrireString(Yaka.YVMfilename, "iand\n");
 	}
 	
+	public void idiff() {
+		Ecriture.ecrireString(Yaka.YVMfilename, "idiff\n");
+	}
+	
 	public void inot()
 	{
 		Ecriture.ecrireString(Yaka.YVMfilename, "inot\n");

@@ -94,6 +94,12 @@ public class YakaToAsm extends YVM
 				+ "\tpush ax\n");
 	}
 	
+	public void idiff() 
+	{
+		this.write(";idiff\n"
+				+ "\t - to do - \n");
+	}
+	
 	public void ineg()
 	{
 		write(";ineg\n"
