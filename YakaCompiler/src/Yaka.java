@@ -233,7 +233,7 @@ public class Yaka implements YakaConstants {
   static final public void lecture() throws ParseException {
     jj_consume_token(43);
     jj_consume_token(ident);
-    yvm.lireEnt(YakaTokenManager.identLu);
+         yvm.lireEnt(tabIdent.findIdent(YakaTokenManager.identLu).getValue());
     jj_consume_token(44);
   }
 
