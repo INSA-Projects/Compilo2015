@@ -8,10 +8,13 @@ public class Expression
 	 */
 	private static final Type[][] tabControl = 
 	{		
-			{Type.ENTIER,Type.ERREUR,Type.ERREUR},
-			{Type.BOOLEEN,Type.ERREUR,Type.ERREUR},
-			{Type.BOOLEEN,Type.BOOLEEN,Type.ERREUR},
-			{Type.ERREUR,Type.BOOLEEN,Type.ERREUR}											
+			// ENTIER 	// BOOLEEN	 // ERREUR
+			{Type.ENTIER,Type.ERREUR,Type.ERREUR}, // + - * /
+			{Type.BOOLEEN,Type.ERREUR,Type.ERREUR}, // > < <= >=
+			{Type.BOOLEEN,Type.BOOLEEN,Type.ERREUR}, // = !=
+			{Type.ERREUR,Type.BOOLEEN,Type.ERREUR}, // ET OU
+			{Type.ENTIER,Type.ERREUR,Type.ERREUR}, // NEG
+			{Type.ERREUR,Type.BOOLEEN,Type.ERREUR} // NON
 	};
 	
 	/**
@@ -68,44 +71,78 @@ public class Expression
 	public void controlType()
 	{
 		Operateur operator = this.operators.pop();
-		Type op1 = this.operandes.pop();
+		Type operande = this.operandes.pop();
 		
-		if (operator.ordinal() == Operateur.NON.ordinal())
-		{
-			this.operandes.push(tabControl[3][op1.ordinal()]);
-			return;
-		}
-		
+		// pop la deuxieme operande
 		this.operandes.pop();
 		
 		switch(operator)
 		{
+		// + - * /
 		case PLUS:
+			this.operandes.push(tabControl[0][operande.ordinal()]);
 			Yaka.yvm.iadd();
+			break;
 		case MOINS:
+			this.operandes.push(tabControl[0][operande.ordinal()]);
 			Yaka.yvm.isub();
+			break;
 		case MULT:
+			this.operandes.push(tabControl[0][operande.ordinal()]);
 			Yaka.yvm.imul();
+			break;
 		case DIV:
+			this.operandes.push(tabControl[0][operande.ordinal()]);
 			Yaka.yvm.idiv();
-			this.operandes.push(tabControl[0][op1.ordinal()]);
 			break;
-			
+		
+		// > < >= <=	
 		case SUP:
+			this.operandes.push(tabControl[1][operande.ordinal()]);
+			Yaka.yvm.isup();
+			break;
 		case INF:
+			this.operandes.push(tabControl[1][operande.ordinal()]);
+			Yaka.yvm.iinf();
+			break;
 		case SUPEG:
+			this.operandes.push(tabControl[1][operande.ordinal()]);
+			Yaka.yvm.isupegal();
+			break;
 		case INFEG:
-			this.operandes.push(tabControl[1][op1.ordinal()]);
+			this.operandes.push(tabControl[1][operande.ordinal()]);
+			Yaka.yvm.iinfegal();
 			break;
 			
+		// = !=	
 		case EG:
+			this.operandes.push(tabControl[2][operande.ordinal()]);
+			Yaka.yvm.iegal();
+			break;
 		case DIFF:
-			this.operandes.push(tabControl[2][op1.ordinal()]);
+			this.operandes.push(tabControl[2][operande.ordinal()]);
+			Yaka.yvm.idiff();
 			break;
 			
+		// ET OU	
 		case ET:
+			this.operandes.push(tabControl[3][operande.ordinal()]);
+			Yaka.yvm.iand();
+			break;
 		case OU:
-			this.operandes.push(tabControl[3][op1.ordinal()]);
+			this.operandes.push(tabControl[3][operande.ordinal()]);
+			Yaka.yvm.ior();
+			break;
+			
+			
+		// Opérations unaires
+		case NEG :
+			this.operandes.push(tabControl[5][operande.ordinal()]);
+			Yaka.yvm.ineg();
+			break;
+		case NON :
+			this.operandes.push(tabControl[5][operande.ordinal()]);
+			Yaka.yvm.inot();
 			break;
 			
 		default:
