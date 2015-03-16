@@ -36,6 +36,11 @@ public class Expression
 		System.out.println("Erreur : deux types ne correspondent pas dans une affectation \n");
 	}
 	
+	public Expression(){
+		this.operandes=new Stack<Type>();
+		this.operators=new Stack<Operateur>();
+	}
+	
 	
 	private  Stack<Operateur> operators;
 	private  Stack<Type> operandes;

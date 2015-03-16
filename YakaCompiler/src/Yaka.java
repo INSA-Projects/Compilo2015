@@ -9,6 +9,11 @@ public class Yaka implements YakaConstants {
 
   public static void main(String args[]) {
     Yaka analyseur;
+    Yaka.yvm = new YVM();
+    Yaka.tabIdent=new TabIdent(42);
+    Yaka.expression= new Expression();
+    Yaka.YVMfilename="slip.yaka";
+    Yaka.ASMfilename="org.asm";
     //evaluator = new Evaluator();
     //generator = new YVMGenerator();
     java.io.InputStream input;
