@@ -11,13 +11,16 @@ public class Yaka {
   public static TabIdent tabIdent;
   public static Expression expression;
   public static YVM yvm;
-  public static String ASMfilename;
+  public static final String ASMfilename = "org.asm";
+  //public static final String YVMfilename = "code.jpeg";
   public static String YVMfilename;
  
   public static void main(String args[]) { 
     Yaka analyseur;
-    //evaluator = new Evaluator();
-    //generator = new YVMGenerator();
+    yvm = new YVM();
+    tabIdent = new TabIdent();
+    expression = new Expression();
+    
     java.io.InputStream input;
 
     if (args.length==1) {
@@ -134,7 +137,7 @@ TOKEN  :
 /**************************************/
 void prog() : {}
 {
-   <PROGRAMME> {yvm.entete();} <ident> {YVMfilename = YakaTokenManager.identLu;}	
+   <PROGRAMME>  <ident> {YVMfilename = YakaTokenManager.identLu;yvm.entete();}	
    bloc()
    <FPROGRAMME> {yvm.queue();}
 }
