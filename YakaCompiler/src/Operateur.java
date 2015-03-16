@@ -12,5 +12,6 @@ public enum Operateur {
 	DIFF,
 	ET,
 	OU,
-	NON
+	NON,
+	NEG
 }

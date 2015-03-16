@@ -67,25 +67,34 @@ public class Expression
 	 */
 	public void controlType()
 	{
+		System.out.println("pop operateur");
 		Operateur operator = this.operators.pop();
+		System.out.println("pop operande");
 		Type op1 = this.operandes.pop();
+		
 		
 		if (operator.ordinal() == Operateur.NON.ordinal())
 		{
 			this.operandes.push(tabControl[3][op1.ordinal()]);
 			return;
 		}
-		
+		System.out.println("pop operande");
 		this.operandes.pop();
 		
 		switch(operator)
 		{
 		case PLUS:
 			Yaka.yvm.iadd();
+			this.operandes.push(tabControl[0][op1.ordinal()]);
+			break;
 		case MOINS:
 			Yaka.yvm.isub();
+			this.operandes.push(tabControl[0][op1.ordinal()]);
+			break;
 		case MULT:
 			Yaka.yvm.imul();
+			this.operandes.push(tabControl[0][op1.ordinal()]);
+			break;
 		case DIV:
 			Yaka.yvm.idiv();
 			this.operandes.push(tabControl[0][op1.ordinal()]);
