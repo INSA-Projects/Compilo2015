@@ -53,14 +53,49 @@ public class YVM
 		Ecriture.ecrireString(Yaka.YVMfilename, "idiv\n");
 	}
 	
+	public void ineg()
+	{
+		Ecriture.ecrireString(Yaka.YVMfilename, "ineg\n");
+	}
+	
+	public void iinf()
+	{
+		Ecriture.ecrireString(Yaka.YVMfilename, "iinf\n");
+	}
+	
 	public void iinfegal()
 	{
 		Ecriture.ecrireString(Yaka.YVMfilename, "iinfegal\n");
 	}
 	
+	public void isup()
+	{
+		Ecriture.ecrireString(Yaka.YVMfilename, "isup\n");
+	}
+	
+	public void isupegal()
+	{
+		Ecriture.ecrireString(Yaka.YVMfilename, "isupegal\n");
+	}
+	
 	public void ior()
 	{
 		Ecriture.ecrireString(Yaka.YVMfilename, "ior\n");
+	}
+	
+	public void iand()
+	{
+		Ecriture.ecrireString(Yaka.YVMfilename, "iand\n");
+	}
+	
+	public void inot()
+	{
+		Ecriture.ecrireString(Yaka.YVMfilename, "inot\n");
+	}
+	
+	public void iegal()
+	{
+		Ecriture.ecrireString(Yaka.YVMfilename, "iegal\n");
 	}
 	
 	public void iload(int offset) {

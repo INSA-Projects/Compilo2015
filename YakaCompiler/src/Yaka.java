@@ -4,18 +4,16 @@ public class Yaka implements YakaConstants {
   public static TabIdent tabIdent;
   public static Expression expression;
   public static YVM yvm;
-  public static String ASMfilename;
+  public static final String ASMfilename = "org.asm";
+  //public static final String YVMfilename = "code.jpeg";
   public static String YVMfilename;
 
   public static void main(String args[]) {
     Yaka analyseur;
-    Yaka.yvm = new YVM();
-    Yaka.tabIdent=new TabIdent(42);
-    Yaka.expression= new Expression();
-    Yaka.YVMfilename="slip.yaka";
-    Yaka.ASMfilename="org.asm";
-    //evaluator = new Evaluator();
-    //generator = new YVMGenerator();
+    yvm = new YVM();
+    tabIdent = new TabIdent();
+    expression = new Expression();
+
     java.io.InputStream input;
 
     if (args.length==1) {
@@ -49,9 +47,8 @@ public class Yaka implements YakaConstants {
 /**************************************/
   static final public void prog() throws ParseException {
     jj_consume_token(PROGRAMME);
-                yvm.entete();
     jj_consume_token(ident);
-                                        YVMfilename = YakaTokenManager.identLu;
+                         YVMfilename = YakaTokenManager.identLu;yvm.entete();
     bloc();
     jj_consume_token(FPROGRAMME);
                  yvm.queue();
@@ -336,7 +333,6 @@ public class Yaka implements YakaConstants {
       }
       opMul();
       facteur();
-                 expression.controlType();
     }
   }
 
@@ -353,7 +349,6 @@ public class Yaka implements YakaConstants {
     case 53:
       opNeg();
       primaire();
-                         expression.controlType();
       break;
     default:
       jj_la1[14] = jj_gen;

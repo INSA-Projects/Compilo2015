@@ -70,7 +70,9 @@ public class Expression
 	 */
 	public void controlType()
 	{
+		System.out.println("pop operateur");
 		Operateur operator = this.operators.pop();
+
 		Type operande = this.operandes.pop();
 		
 		// pop la deuxieme operande

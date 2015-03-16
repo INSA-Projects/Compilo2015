@@ -94,6 +94,19 @@ public class YakaToAsm extends YVM
 				+ "\tpush ax\n");
 	}
 	
+	public void ineg()
+	{
+		write(";ineg\n"
+				+ "\t - to do - \n");
+		
+	}
+	
+	public void iinf()
+	{
+		write(";iinf\n"
+				+ "\t - to do - \n");
+	}
+	
 	public void iinfegal()
 	{
 		this.write(";iinfegal\n"
@@ -106,6 +119,18 @@ public class YakaToAsm extends YVM
 				+ "\tpush 0\n");
 	}
 	
+	public void isup()
+	{
+		write(";isup\n"
+				+ "\t - to do - \n");
+	}
+	
+	public void isupegal()
+	{
+		write(";isupegal\n"
+				+ "\t - to do - \n");
+	}
+	
 	public void ior()
 	{
 		this.write(";ior\n"
@@ -113,6 +138,24 @@ public class YakaToAsm extends YVM
 				+ "\tpop ax\n"
 				+ "\tor ax,bx\n"
 				+ "\tpush ax\n");
+	}
+	
+	public void iand()
+	{
+		write(";iand\n"
+				+ "\t - to do - \n");
+	}
+	
+	public void inot()
+	{
+		write(";inot\n"
+				+ "\t - to do - \n");
+	}
+	
+	public void iegal()
+	{
+		write(";iegal\n"
+				+ "\t - to do - \n");
 	}
 	
 	public void iload(int value)

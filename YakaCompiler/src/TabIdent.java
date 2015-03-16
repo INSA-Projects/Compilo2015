@@ -8,7 +8,7 @@ public class TabIdent
 	 * Constructor
 	 * @param size
 	 */
-	public TabIdent(int size)
+	public TabIdent()
 	{
 		this.table = new HashMap<String, Ident>();
 	}
