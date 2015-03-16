@@ -294,6 +294,6 @@ void opMul() : {}
 } 
 
 void opNeg() : {}
-{ "-" 		{expression.pushOperator(Operateur.MOINS);}
+{ "-" 		{expression.pushOperator(Operateur.NEG);}
  | <NON>	{expression.pushOperator(Operateur.NON);}
 }
