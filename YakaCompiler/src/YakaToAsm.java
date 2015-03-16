@@ -96,12 +96,15 @@ public class YakaToAsm extends YVM
 	
 	public void ineg()
 	{
+		write(";ineg\n"
+				+ "\t - to do - \n");
 		
 	}
 	
 	public void iinf()
 	{
-		
+		write(";iinf\n"
+				+ "\t - to do - \n");
 	}
 	
 	public void iinfegal()
@@ -118,12 +121,14 @@ public class YakaToAsm extends YVM
 	
 	public void isup()
 	{
-		
+		write(";isup\n"
+				+ "\t - to do - \n");
 	}
 	
 	public void isupegal()
 	{
-		
+		write(";isupegal\n"
+				+ "\t - to do - \n");
 	}
 	
 	public void ior()
@@ -137,17 +142,20 @@ public class YakaToAsm extends YVM
 	
 	public void iand()
 	{
-		
+		write(";iand\n"
+				+ "\t - to do - \n");
 	}
 	
 	public void inot()
 	{
-		
+		write(";inot\n"
+				+ "\t - to do - \n");
 	}
 	
 	public void iegal()
 	{
-		
+		write(";iegal\n"
+				+ "\t - to do - \n");
 	}
 	
 	public void iload(int value)
