@@ -3,14 +3,14 @@ public class Yaka implements YakaConstants {
   public static Declaration declaration;
   public static TabIdent tabIdent;
   public static Expression expression;
-  public static YVM yvm;
+  public static YakaToAsm yvm;
   public static final String ASMfilename = "org.asm";
   //public static final String YVMfilename = "code.jpeg";
   public static String YVMfilename;
 
   public static void main(String args[]) {
     Yaka analyseur;
-    yvm = new YVM();
+    yvm = new YakaToAsm();
     tabIdent = new TabIdent();
     expression = new Expression();
 
@@ -243,11 +243,14 @@ public class Yaka implements YakaConstants {
 
   static final public void iteration() throws ParseException {
     jj_consume_token(TANTQUE);
+                   yvm.tantQue();
     expression();
-                                expression.isBooleanExpression();
+                       expression.isBooleanExpression();
     jj_consume_token(FAIRE);
+                 yvm.faire();
     suiteInstr();
     jj_consume_token(FAIT);
+                yvm.fait();
   }
 
   static final public void affectation() throws ParseException {

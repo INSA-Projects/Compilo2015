@@ -129,6 +129,7 @@ public class YVM
 		Ecriture.ecrireString(Yaka.YVMfilename, "ecrireEnt\n");
 	}
 	
+	// iteration
 	public void tantQue()
 	{
 		coptTaq++;
@@ -145,6 +146,8 @@ public class YVM
 		Ecriture.ecrireString(Yaka.YVMfilename, "fait"+taquEtiq.pop()+":\n");
 	}
 	
+	
+	// conditionnelle
 	public void iffauxCond(){
 		this.cptCond++;
 		this.condEtiq.push(this.cptCond);

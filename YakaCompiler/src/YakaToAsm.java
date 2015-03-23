@@ -241,4 +241,53 @@ public class YakaToAsm extends YVM
 		this.write("; ecrireEnt\n"
 				+ "\tcall ecrent\n");
 	}
+	
+	// iteration
+	public void tantQue()
+	{
+		coptTaq++;
+		Ecriture.ecrireString(Yaka.ASMfilename, "FAIRE"+coptTaq+":\n");
+		taquEtiq.push(coptTaq);
+	}
+	
+	public void faire(){
+		Ecriture.ecrireString(Yaka.ASMfilename, ";iffaux fait"+taquEtiq.peek()+"\n"
+				+ "\tpop ax\n"
+				+ "\tcmp ax,0\n"
+				+ "je FAIT"+taquEtiq.peek()+"\n");
+	}
+	
+	public void fait(){
+		Ecriture.ecrireString(Yaka.ASMfilename, ";Goto faire"+taquEtiq.peek()+"\n"
+				+ "\tjmp FAIRE"+taquEtiq.peek()+"\n");
+		Ecriture.ecrireString(Yaka.ASMfilename, "fait"+taquEtiq.pop()+":\n");
+	}
+	
+	// conditionnelle
+	public void iffauxCond(){
+		this.cptCond++;
+		this.condEtiq.push(this.cptCond);
+		Ecriture.ecrireString(Yaka.ASMfilename, 
+				";iffaux SINON"+this.cptCond+"\n"
+				+ "\tpop ax\n"
+				+ "\tcmp ax,0\n"
+				+ "\tje SINON"+this.cptCond+"\n");
+	}
+	
+	public void goTo(){
+		Ecriture.ecrireString(Yaka.ASMfilename,
+				";goto FSI"+this.condEtiq.peek()+
+				"\n"
+				+ "\tgoto FSI"+this.condEtiq.peek()+"\n");
+	}
+	
+	public void sinon(){
+		Ecriture.ecrireString(Yaka.ASMfilename,
+				"SINON"+this.condEtiq.peek()+" :\n");
+	}
+	
+	public void fsi(){
+		Ecriture.ecrireString(Yaka.ASMfilename, "FSI"+this.condEtiq.pop()+"\n");
+	}
+	
 }
