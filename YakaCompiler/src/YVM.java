@@ -6,6 +6,8 @@ public class YVM
 	protected int allocatedMemory = 0;
 	protected int coptTaq =0;
 	protected Stack<Integer> taquEtiq =new Stack<Integer>();
+	protected int cptCond = 0;
+	protected Stack<Integer> condEtiq = new Stack<Integer>();
 	
 	public void alloc()
 	{
@@ -143,7 +145,23 @@ public class YVM
 		Ecriture.ecrireString(Yaka.YVMfilename, "fait"+taquEtiq.pop()+":\n");
 	}
 	
+	public void iffauxCond(){
+		this.cptCond++;
+		this.condEtiq.push(this.cptCond);
+		Ecriture.ecrireString(Yaka.YVMfilename, "iffaux SINON"+this.cptCond+"\n");
+	}
 	
+	public void goTo(){
+		Ecriture.ecrireString(Yaka.YVMfilename, "goto FSI"+this.condEtiq.peek()+"\n");
+	}
 	
+	public void sinon(){
+		Ecriture.ecrireString(Yaka.YVMfilename, "SINON"+this.condEtiq.peek()+" :\n");
+	}
+	
+	public void fsi(){
+		Ecriture.ecrireString(Yaka.YVMfilename, "FSI"+this.condEtiq.pop()+"\n");
+	}
 }
+
 
