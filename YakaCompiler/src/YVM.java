@@ -16,6 +16,7 @@ public class YVM
 	
 	public void entete()
 	{
+		Ecriture.clearFile(Yaka.YVMfilename);
 		Ecriture.ecrireString(Yaka.YVMfilename, "entete\n");
 	}
 	
@@ -160,7 +161,7 @@ public class YVM
 	}
 	
 	public void fsi(){
-		Ecriture.ecrireString(Yaka.YVMfilename, "FSI"+this.condEtiq.pop()+"\n");
+		Ecriture.ecrireString(Yaka.YVMfilename, "FSI"+this.condEtiq.pop()+" :\n");
 	}
 }
 

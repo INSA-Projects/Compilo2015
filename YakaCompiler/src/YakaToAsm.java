@@ -23,6 +23,7 @@ public class YakaToAsm extends YVM
 	
 	public void entete()
 	{
+		Ecriture.clearFile(Yaka.ASMfilename);
 		Ecriture.ecrireString(Yaka.ASMfilename, "\t; entete\n"
 				+ "\textrn lirent:proc, ecrent:proc\n"
 				+ "\textrn ecrbool:proc\n"
