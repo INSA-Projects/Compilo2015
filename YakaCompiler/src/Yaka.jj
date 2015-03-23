@@ -41,7 +41,7 @@ public class Yaka {
     try {
       analyseur = new Yaka(input);
       analyseur.prog();
-      System.out.println("Analyse synaxique réussie !");
+      System.out.println("Analyse syntaxique réussie !");
     } catch (ParseException e) {
       String msg = e.getMessage();
       msg = msg.substring(0,msg.indexOf("\n"));
@@ -137,7 +137,7 @@ TOKEN  :
 /**************************************/
 void prog() : {}
 {
-   <PROGRAMME>  <ident> {YVMfilename = YakaTokenManager.identLu;yvm.entete();}	
+   <PROGRAMME>  <ident> {YVMfilename = YakaTokenManager.identLu; yvm.entete();}	
    bloc()
    <FPROGRAMME> {yvm.queue();}
 }
@@ -201,9 +201,14 @@ void instruction() : {}
 void conditionnelle() : {} 
 {
 	<SI> expression() {expression.isBooleanExpression();}
-	<ALORS> suiteInstr()
-	<SINON> suiteInstr()
-	<FSI>
+	<ALORS> {yvm.iffauxCond();}
+	suiteInstr() 
+	{yvm.goTo(); yvm.sinon();}
+	(
+	<SINON> 
+	suiteInstr()
+	)?
+	<FSI> {yvm.fsi();}
 }
 	
 
