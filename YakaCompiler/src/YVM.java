@@ -1,7 +1,11 @@
+import java.util.Stack;
+
 
 public class YVM 
 {
 	protected int allocatedMemory = 0;
+	protected int coptTaq =0;
+	protected Stack<Integer> taquEtiq =new Stack<Integer>();
 	
 	public void alloc()
 	{
@@ -110,7 +114,8 @@ public class YVM
 		Ecriture.ecrireString(Yaka.YVMfilename, "ecrireChaine "+chaine+"\n");
 	}
 	
-	public void aLaLigne(){
+	public void aLaLigne()
+	{
 		Ecriture.ecrireString(Yaka.YVMfilename, "aLaLigne\n");
 	}
 	
@@ -121,6 +126,24 @@ public class YVM
 	public void ecrireEnt(){
 		Ecriture.ecrireString(Yaka.YVMfilename, "ecrireEnt\n");
 	}
+	
+	public void tantQue()
+	{
+		coptTaq++;
+		Ecriture.ecrireString(Yaka.YVMfilename, "FAIRE"+coptTaq+":\n");
+		taquEtiq.push(coptTaq);
+	}
+	
+	public void faire(){
+		Ecriture.ecrireString(Yaka.YVMfilename, "iffaux fait"+taquEtiq.peek()+"\n");
+	}
+	
+	public void fait(){
+		Ecriture.ecrireString(Yaka.YVMfilename, "Goto faire"+taquEtiq.peek()+"\n");
+		Ecriture.ecrireString(Yaka.YVMfilename, "fait"+taquEtiq.pop()+":\n");
+	}
+	
+	
 	
 }
 
