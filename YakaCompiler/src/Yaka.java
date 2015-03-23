@@ -3,14 +3,14 @@ public class Yaka implements YakaConstants {
   public static Declaration declaration;
   public static TabIdent tabIdent;
   public static Expression expression;
-  public static YakaToAsm yvm;
+  public static YVM yvm;
   public static final String ASMfilename = "org.asm";
   //public static final String YVMfilename = "code.jpeg";
   public static String YVMfilename;
 
   public static void main(String args[]) {
     Yaka analyseur;
-    yvm = new YakaToAsm();
+    yvm = new YVM();
     tabIdent = new TabIdent();
     expression = new Expression();
 
@@ -34,7 +34,7 @@ public class Yaka implements YakaConstants {
     try {
       analyseur = new Yaka(input);
       analyseur.prog();
-      System.out.println("Analyse syntaxique r\u00e9ussie !");
+      System.out.println("Analyse synaxique r\u00e9ussie !");
     } catch (ParseException e) {
       String msg = e.getMessage();
       msg = msg.substring(0,msg.indexOf("\n"));
@@ -190,6 +190,8 @@ public class Yaka implements YakaConstants {
       }
       jj_consume_token(41);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case SI:
+      case TANTQUE:
       case ALALIGNE:
       case ident:
       case 43:
@@ -215,11 +217,37 @@ public class Yaka implements YakaConstants {
     case 45:
       ecriture();
       break;
+    case TANTQUE:
+      iteration();
+      break;
+    case SI:
+      conditionnelle();
+      break;
     default:
       jj_la1[8] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
+  }
+
+  static final public void conditionnelle() throws ParseException {
+    jj_consume_token(SI);
+    expression();
+                           expression.isBooleanExpression();
+    jj_consume_token(ALORS);
+    suiteInstr();
+    jj_consume_token(SINON);
+    suiteInstr();
+    jj_consume_token(FSI);
+  }
+
+  static final public void iteration() throws ParseException {
+    jj_consume_token(TANTQUE);
+    expression();
+                                expression.isBooleanExpression();
+    jj_consume_token(FAIRE);
+    suiteInstr();
+    jj_consume_token(FAIT);
   }
 
   static final public void affectation() throws ParseException {
@@ -513,7 +541,7 @@ public class Yaka implements YakaConstants {
       jj_la1_1();
    }
    private static void jj_la1_0() {
-      jj_la1_0 = new int[] {0x80000,0x200,0x0,0x120000,0x0,0x8100,0x0,0x0,0x0,0x1120000,0x0,0x0,0x400000,0x800000,0x1120000,0x120000,0x120000,0x0,0x400000,0x800000,0x1000000,};
+      jj_la1_0 = new int[] {0x80000,0x200,0x0,0x120000,0x0,0x8100,0x0,0x42000,0x42000,0x1120000,0x0,0x0,0x400000,0x800000,0x1120000,0x120000,0x120000,0x0,0x400000,0x800000,0x1000000,};
    }
    private static void jj_la1_1() {
       jj_la1_1 = new int[] {0x0,0x0,0x100,0x50,0x100,0x0,0x200,0x2844,0x2844,0x2040d0,0x2004,0xf8400,0x300000,0xc00000,0x204050,0x4050,0x50,0xf8400,0x300000,0xc00000,0x200000,};

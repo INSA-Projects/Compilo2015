@@ -195,7 +195,23 @@ void suiteInstr() : {}
 
 void instruction() : {}
 {
-	affectation() | lecture() | ecriture()
+	affectation() | lecture() | ecriture() | iteration() | conditionnelle()
+}
+
+void conditionnelle() : {} 
+{
+	<SI> expression() {expression.isBooleanExpression();}
+	<ALORS> suiteInstr()
+	<SINON> suiteInstr()
+	<FSI>
+}
+	
+
+void iteration() : {}
+{
+	<TANTQUE> expression() {expression.isBooleanExpression();} 
+	<FAIRE> suiteInstr()
+	<FAIT>
 }
 
 void affectation() : {}

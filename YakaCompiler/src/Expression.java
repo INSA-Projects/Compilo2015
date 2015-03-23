@@ -41,6 +41,15 @@ public class Expression
 		this.nomIdentAffected = ident;
 	}
 	
+	// Contrôle si l'expression est booléenne (pour itération)
+	public void isBooleanExpression() {
+		Type typeExpr = this.operandes.peek();
+		if (typeExpr == Type.BOOLEEN) {
+			return;
+		}
+		System.out.println("Erreur de type d'expression ligne"+SimpleCharStream.getEndLine()+". Expression booléenne attendue. \n");
+	}
+	
 	public void controlTypeAffectation() {
 		Type type1 = operandes.pop();
 		if (type1 == this.identAffected.getType()) {
@@ -97,17 +106,12 @@ public class Expression
 		Type operande = this.operandes.pop();
 		
 		// pop la deuxieme operande
-		// Seulement dans le cas d'une opération binaire
-		
-		System.out.println("type op :"+operator);
-		System.out.println("type operande1 :"+operande);
-		
+		// Seulement dans le cas d'une opération binaire	
 		if (!(operator.ordinal() == Operateur.NEG.ordinal() || operator.ordinal() == Operateur.NON.ordinal())) {
 			Type tmp = this.operandes.pop();
 			// En Yaka on suppose les deux opérandes de même type
-			System.out.println("type operande1 :"+tmp);
 			if (tmp!=operande) {
-				System.out.println("\nErreur : opération entre deux types différents \n");
+				System.out.println("Erreur : opération entre deux types différents \n");
 				this.operandes.push(Type.ERREUR);
 				return;
 			}
