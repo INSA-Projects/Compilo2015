@@ -3,14 +3,14 @@ public class Yaka implements YakaConstants {
   public static Declaration declaration;
   public static TabIdent tabIdent;
   public static Expression expression;
-  public static YakaToAsm yvm;
+  public static YVM yvm;
   public static final String ASMfilename = "org.asm";
   //public static final String YVMfilename = "code.jpeg";
   public static String YVMfilename;
 
   public static void main(String args[]) {
     Yaka analyseur;
-    yvm = new YakaToAsm();
+    yvm = new YVM();
     tabIdent = new TabIdent();
     expression = new Expression();
 
