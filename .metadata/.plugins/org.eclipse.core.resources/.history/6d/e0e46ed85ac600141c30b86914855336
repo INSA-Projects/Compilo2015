@@ -1,9 +1,0 @@
-
-@SuppressWarnings("serial")
-public class IdentNotFoundException extends Exception {
-
-	public IdentNotFoundException() {
-	
-	}
-
-}
