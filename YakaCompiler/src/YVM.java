@@ -139,12 +139,12 @@ public class YVM
 	}
 	
 	public void faire(){
-		Ecriture.ecrireString(Yaka.YVMfilename, "iffaux fait"+taquEtiq.peek()+"\n");
+		Ecriture.ecrireString(Yaka.YVMfilename, "iffaux FAIT"+taquEtiq.peek()+"\n");
 	}
 	
 	public void fait(){
-		Ecriture.ecrireString(Yaka.YVMfilename, "Goto faire"+taquEtiq.peek()+"\n");
-		Ecriture.ecrireString(Yaka.YVMfilename, "fait"+taquEtiq.pop()+":\n");
+		Ecriture.ecrireString(Yaka.YVMfilename, "goto FAIRE"+taquEtiq.peek()+"\n");
+		Ecriture.ecrireString(Yaka.YVMfilename, "FAIT"+taquEtiq.pop()+":\n");
 	}
 	
 	
