@@ -4,16 +4,26 @@ import java.util.Stack;
 public class YVM 
 {
 	protected int allocatedMemory = 0;
+	protected int allocParam =2;		
+	
 	protected int coptTaq =0;
 	protected Stack<Integer> taquEtiq =new Stack<Integer>();
 	protected int cptCond = 0;
 	protected Stack<Integer> condEtiq = new Stack<Integer>();
+	
+	public void clear (){
+		allocatedMemory=0;
+		allocParam=2;
+	}
 	
 	public void alloc()
 	{
 		this.allocatedMemory += 2;
 	}
 	
+	public void addAllocParam(){
+		this.allocParam+=2;
+	}
 	public void entete()
 	{
 		Ecriture.clearFile(Yaka.YVMfilename);

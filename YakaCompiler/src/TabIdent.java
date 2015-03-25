@@ -3,6 +3,10 @@ import java.util.HashMap;
 public class TabIdent 
 {
 	private HashMap<String,Ident> table;
+	private HashMap<String ,Ident> locaux;
+	
+	
+
 	
 	/**
 	 * Constructor
@@ -24,7 +28,7 @@ public class TabIdent
 	}
 	
 	/**
-	 * Retrun true if key exist
+	 * Return true if key exist
 	 * @param key
 	 * @return
 	 */
@@ -78,6 +82,16 @@ public class TabIdent
 			return -1;
 		}	
 	}
+	
+	public void clearLoco(){
+		this.locaux.clear();
+	}
+	
+	public void addLoco(String s,Ident i){
+		locaux.put(s, i);
+	}
+	
+	
 
 }
 
