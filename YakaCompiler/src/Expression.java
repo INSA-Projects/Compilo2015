@@ -17,8 +17,8 @@ public class Expression
 			{Type.BOOLEEN,Type.ERREUR,Type.ERREUR}, // SUP
 			{Type.BOOLEEN,Type.ERREUR,Type.ERREUR}, // INFEG
 			{Type.BOOLEEN,Type.ERREUR,Type.ERREUR}, // SUPEG
-			{Type.BOOLEEN,Type.ERREUR,Type.ERREUR}, // EG
-			{Type.BOOLEEN,Type.ERREUR,Type.ERREUR}, // DIFF
+			{Type.BOOLEEN,Type.BOOLEEN,Type.ERREUR}, // EG
+			{Type.BOOLEEN,Type.BOOLEEN,Type.ERREUR}, // DIFF
 			{Type.ERREUR,Type.BOOLEEN,Type.ERREUR}, // ET
 			{Type.ERREUR,Type.BOOLEEN,Type.ERREUR}, // OU
 			{Type.ENTIER,Type.ERREUR,Type.ERREUR}, // NEG
