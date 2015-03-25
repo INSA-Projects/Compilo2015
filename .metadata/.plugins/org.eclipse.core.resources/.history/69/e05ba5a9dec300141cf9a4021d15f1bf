@@ -1,9 +1,0 @@
-
-public class Declaration {
-	private String identStocked; // dans defConst()
-	
-	public Declaration(String ident) {
-		this.identStocked = ident;
-	}
-
-}
