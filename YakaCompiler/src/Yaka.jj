@@ -138,7 +138,10 @@ TOKEN  :
 void prog() : {}
 {
    <PROGRAMME>  <ident> {YVMfilename = YakaTokenManager.identLu; yvm.entete();}	
+   (declFonction())*
+   <PRINCIPAL>
    bloc()
+   <FPRINCIPAL>
    <FPROGRAMME> {yvm.queue();}
 }
 
@@ -195,7 +198,7 @@ void suiteInstr() : {}
 
 void instruction() : {}
 {
-	affectation() | lecture() | ecriture() | iteration() | conditionnelle()
+	affectation() | lecture() | ecriture() | iteration() | conditionnelle()| retourne()
 }
 
 void conditionnelle() : {} 
@@ -285,6 +288,7 @@ void valeur() : {}
 		 yvm.iconst(YakaTokenManager.entierLu);}
  | <ident> 	{expression.pushOperande(tabIdent.getType(YakaTokenManager.identLu));
  		 expression.accedeIdent(YakaTokenManager.identLu);}	
+ (argumentsFonction())?
  | <VRAI> 	{expression.pushOperande(Type.BOOLEEN);
  		 yvm.iconst(-1);}	
  | <FAUX> 	{expression.pushOperande(Type.BOOLEEN);
@@ -320,3 +324,37 @@ void opNeg() : {}
 { "-" 		{expression.pushOperator(Operateur.NEG);}
  | <NON>	{expression.pushOperator(Operateur.NON);}
 }
+
+void declFonction() : {}
+{
+	type()
+	<FONCTION>
+	<ident>
+	paramForms()
+	bloc()
+	<FFONCTION>
+}
+
+void paramForms() : {}
+{
+	"(" (paramForm() ("," paramForm())*)? ")"
+}
+
+void paramForm() : {}
+{
+	type()
+	<ident>
+}
+
+void argumentsFonction() :{}
+{
+	"(" (expression() ("," expression())*)? ")"
+}
+
+void retourne() : {}
+{
+	<RETOURNE>
+	expression()
+}
+	
+	
