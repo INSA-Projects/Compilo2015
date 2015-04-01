@@ -39,6 +39,7 @@ public class Declaration {
 	public void setParam (String key, Type type){
 		Ident ident = new Ident(type, 0);
 		Yaka.tabIdent.addLoco(key, ident);
+	}
 
 	// Ajout dans TabIdent d'une fonction
 	public void setFunction(String key) {
