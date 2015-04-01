@@ -3,9 +3,7 @@ import java.util.Stack;
 
 public class Expression 
 {
-	/**
-	 * Tableau des types de résultat
-	 */
+	// Tableau des correspondances de types en fonction des opérations
 	private static final Type[][] tabControl = 
 	{		
 			// ENTIER 	// BOOLEEN	 // ERREUR
@@ -24,85 +22,32 @@ public class Expression
 			{Type.ENTIER,Type.ERREUR,Type.ERREUR}, // NEG
 			{Type.ERREUR,Type.BOOLEEN,Type.ERREUR}, // NON
 	};
+	// Pile des opérateurs dans une expression
+	private  Stack<Operateur> operators;
+	// Pile des opérandes dans une expression
+	private  Stack<Type> operandes;
 	
-	/**
-	 * Type de la variable à affecter
-	 */
-	
-	private Ident identAffected;
-	private String nomIdentAffected;
-	
-	public void setIdentAffected(String ident) {
-		this.identAffected = Yaka.tabIdent.findIdent(ident);
-		if (this.identAffected instanceof IdConst) {
-			System.out.println("Erreur : "+ident+" n'est pas une variable ligne "+SimpleCharStream.getEndLine()+"\n");
-		}
-		
-		this.nomIdentAffected = ident;
-	}
-	
-	// Contrôle si l'expression est booléenne (pour itération)
-	public void isBooleanExpression() {
-		Type typeExpr = this.operandes.peek();
-		if (typeExpr == Type.BOOLEEN) {
-			return;
-		}
-		System.out.println("Erreur de type d'expression ligne"+SimpleCharStream.getEndLine()+". Expression booléenne attendue. \n");
-	}
-	
-	public void controlTypeAffectation() {
-		Type type1 = operandes.pop();
-		if (type1 == this.identAffected.getType()) {
-			// Affectation correcte
-			Yaka.yvm.istore(Yaka.tabIdent.getValue(nomIdentAffected));
-			return;
-		}
-		System.out.println("\nErreur : deux types ne correspondent pas dans une affectation ligne "+SimpleCharStream.getEndLine()+"\n");
-	}
-	
+
+	// Constructeur d'Expression
 	public Expression(){
 		this.operandes=new Stack<Type>();
 		this.operators=new Stack<Operateur>();
 	}
 	
-	
-	private  Stack<Operateur> operators;
-	private  Stack<Type> operandes;
-	
-	/**
-	 * Push le type de l'opérande dans la pile operandes
-	 * @param t
-	 */
+	// Ajoute une opérande dans la pile des opérandes
 	public void pushOperande ( Type t){
 		operandes.push(t);
 	}
 	
-	/**
-	 * Push l'opérateur dans la pile operators
-	 * @param op
-	 */
+	// Ajoute un opérateur dans la pile des opérateurs
 	public void pushOperator (Operateur op){
 		operators.push(op);
 	}
 	
-	
-	public void accedeIdent(String s) {
-		Ident id = Yaka.tabIdent.findIdent(s);
-		if (id instanceof IdConst) {
-			Yaka.yvm.iconst(Yaka.tabIdent.getValue(YakaTokenManager.identLu));
-		}
-		else {
-			Yaka.yvm.iload(Yaka.tabIdent.getValue(YakaTokenManager.identLu));
-		}
-	}
-	
-	/**
-	 * Contrôle du type sur l'opérateur operator
-	 */
+	// Contrôle de type lors d'une expression
 	public void controlType()
 	{
 		Operateur operator = this.operators.pop();
-
 		Type operande = this.operandes.pop();
 		
 		// pop la deuxieme operande
@@ -192,4 +137,65 @@ public class Expression
 		}
 	}
 	
+	//-------------------------------------- Affectation --------------------------------------//
+	
+	// Ident en cours d'affectation
+	private Ident identAffected;
+	// Nom de l'ident en cours d'affectation
+	private String nomIdentAffected;
+	
+	// Setter de l'ident en cours d'affectation (ne peut pas être une constante)
+	public void setIdentAffected(String ident) {
+		this.identAffected = Yaka.tabIdent.findIdent(ident);
+		if (this.identAffected instanceof IdConst) {
+			System.out.println("Erreur : "+ident+" n'est pas une variable ligne "+SimpleCharStream.getEndLine()+"\n");
+		}
+		
+		this.nomIdentAffected = ident;
+	}
+	
+	// Génère le code YVM permettant de modifier la valeur d'un ident. (iload et iconst)
+	public void accedeIdent(String s) {
+		Ident id = Yaka.tabIdent.findIdent(s);
+		if (id instanceof IdConst) {
+			Yaka.yvm.iconst(Yaka.tabIdent.getValue(YakaTokenManager.identLu));
+		}
+		else {
+			Yaka.yvm.iload(Yaka.tabIdent.getValue(YakaTokenManager.identLu));
+		}
+	}
+	
+	// Contrôle si le type affecté correspond au type de l'ident 
+	public void controlTypeAffectation() {
+		Type type1 = operandes.pop();
+		if (type1 == this.identAffected.getType()) {
+			// Affectation correcte
+			Yaka.yvm.istore(Yaka.tabIdent.getValue(nomIdentAffected));
+			return;
+		}
+		System.out.println("\nErreur : deux types ne correspondent pas dans une affectation ligne "+SimpleCharStream.getEndLine()+"\n");
+	}
+
+	//-------------------------------------- Itération --------------------------------------//
+	
+	// Contrôle si l'expression est booléenne (pour l'itération)
+	public void isBooleanExpression() {
+		Type typeExpr = this.operandes.peek();
+		if (typeExpr == Type.BOOLEEN) {
+			return;
+		}
+		System.out.println("Erreur de type d'expression ligne"+SimpleCharStream.getEndLine()+". Expression booléenne attendue. \n");
+	}
+	
+	//-------------------------------------- Fonction --------------------------------------//
+	
+	// Pendant la déclaration : contrôle si le type de retour de la fonction correspond au type attendu
+	public void controlTypeFonction(Type typeDecl) {
+		if (typeDecl != this.operandes.peek()) {
+			System.out.println("\nErreur : le type de retour de la fonction ne correspond pas au type attendu "+"("+typeDecl+")"+" ligne "+SimpleCharStream.getEndLine()+"\n");
+		}
+	}
+
+	
+
 }

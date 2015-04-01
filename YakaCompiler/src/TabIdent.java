@@ -2,7 +2,7 @@ import java.util.HashMap;
 
 public class TabIdent 
 {
-	private HashMap<String,Ident> table;
+	private HashMap<String,Ident> globaux;
 	private HashMap<String ,Ident> locaux;
 	public int cptParam = 0;
 	
@@ -13,10 +13,11 @@ public class TabIdent
 	 * Constructor
 	 * @param size
 	 */
-	public TabIdent()
-	{
-		this.table = new HashMap<String, Ident>();
+	public TabIdent(){
+		this.globaux = new HashMap<String, Ident>();
+		this.locaux = new HashMap<String, Ident>();
 	}
+	
 	
 	/**
 	 * Find the ident
@@ -25,7 +26,7 @@ public class TabIdent
 	 */
 	public Ident findIdent (String key)
 	{
-		return table.get(key);
+		return globaux.get(key);
 	}
 	
 	/**
@@ -35,7 +36,7 @@ public class TabIdent
 	 */
 	public boolean identExist (String key)
 	{
-		return table.containsKey(key);
+		return globaux.containsKey(key);
 	}
 	
 	/**
@@ -49,7 +50,7 @@ public class TabIdent
 			System.out.println("Ident : "+key+" Erreur cet Ident existe déjà dans la table des identificateurs ligne"+SimpleCharStream.getEndLine()+"\n");
 			return;
 		}
-		table.put(key, id);
+		globaux.put(key, id);
 	}
 	
 	/**
@@ -60,7 +61,7 @@ public class TabIdent
 	public Type getType (String key)
 	{
 		if (this.identExist(key)){
-			Ident ident = this.table.get(key);
+			Ident ident = this.globaux.get(key);
 			return ident.getType();
 		}
 		else {
