@@ -12,6 +12,11 @@ public class Declaration {
 		this.keyName = ident;
 	}
 	
+	// Getter pour typeVar
+	public Type getType() {
+		return this.typeVar;
+	}
+	
 	// Déclaration pour une variable ou une fonction
 	public Declaration(Type type) {
 		this.typeVar = type;

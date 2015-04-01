@@ -354,7 +354,7 @@ void argumentsFonction() :{}
 void retourne() : {}
 {
 	<RETOURNE>
-	expression()
+	expression() {expression.controlTypeFonction(declaration.getType());}
 }
 	
 	
