@@ -329,7 +329,7 @@ void declFonction() : {}
 {
 	type()
 	<FONCTION>
-	<ident>
+	<ident> {declaration.setFunction(YakaTokenManager.identLu);}
 	paramForms()
 	bloc()
 	<FFONCTION>

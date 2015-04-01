@@ -12,7 +12,7 @@ public class Declaration {
 		this.keyName = ident;
 	}
 	
-	// Déclaration pour une variable
+	// Déclaration pour une variable ou une fonction
 	public Declaration(Type type) {
 		this.typeVar = type;
 	}
@@ -28,6 +28,12 @@ public class Declaration {
 		IdVar ident = new IdVar(typeVar, offset);
 		offset-=2;
 		Yaka.tabIdent.putIdent(key,ident);
+	}
+	
+	// Ajout dans TabIdent d'une fonction
+	public void setFunction(String key) {
+		Function function = new Function(typeVar);
+		Yaka.tabIdent.putIdent(key,function);
 	}
 	
 }
