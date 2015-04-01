@@ -4,6 +4,7 @@ public class TabIdent
 {
 	private HashMap<String,Ident> table;
 	private HashMap<String ,Ident> locaux;
+	public int cptParam = 0;
 	
 	
 
@@ -84,11 +85,25 @@ public class TabIdent
 	}
 	
 	public void clearLoco(){
+		this.cptParam=0;
 		this.locaux.clear();
 	}
 	
 	public void addLoco(String s,Ident i){
 		locaux.put(s, i);
+	}
+	
+	public void calculateOffsets()
+	{
+		int rang=1;
+		int size = locaux.size();
+		for (String mapKey : locaux.keySet()) {
+			Ident ident = locaux.remove(mapKey);
+			ident.setValue(size + 4 - (rang * 2));
+			locaux.put(mapKey,ident);
+			rang ++;
+			// utilise ici hashMap.get(mapKey) pour accéder aux valeurs
+		}
 	}
 	
 	

@@ -30,4 +30,9 @@ public class Declaration {
 		Yaka.tabIdent.putIdent(key,ident);
 	}
 	
+	public void setParam (String key, Type type){
+		Ident ident = new Ident(type, 0);
+		Yaka.tabIdent.addLoco(key, ident);
+	}
+	
 }

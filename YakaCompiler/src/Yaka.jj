@@ -333,22 +333,25 @@ void declFonction() : {}
 	paramForms()
 	bloc()
 	<FFONCTION>
+	tabIdent.clearLoco();
 }
 
 void paramForms() : {}
 {
-	"(" (paramForm() ("," paramForm())*)? ")"
+	"(" (paramForm()  ("," paramForm())*)? ")"
 }
 
 void paramForm() : {}
 {
+	tabIdent.cptParam++;
 	type()
 	<ident>
+	tabIdent.
 }
 
 void argumentsFonction() :{}
 {
-	"(" (expression() ("," expression())*)? ")"
+	"(" (expression() ("," expression())*)? tabIdent.calculateOffsets()")"
 }
 
 void retourne() : {}
