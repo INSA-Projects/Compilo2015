@@ -1,21 +1,44 @@
-import java.awt.List;
-import java.util.HashMap;
-
+import java.util.Stack;
 
 public class Function extends Ident
 {
-	private HashMap<String,Ident> parameters;
+	// Paramètres de la fonction
+	private Stack<Param> parameters;
 	
+	// Type passés en paramètres lors d'un appel à la fonction
+	private Stack<Type> parametreATester;
+
 	public Function(Type t){
 		super(t,0);
-		parameters = new HashMap<String, Ident>();
+		parameters = new Stack<Param>();
 	}
 
-	public void addParam (String nom, Ident t){
-		parameters.put(nom, t);
+	public void addParam(Param p){
+		parameters.push(p);
 	}
 	
+	// Effectue le contrôle de type des paramètres de la fonction
+	public void controlTypeParam() {
+		// Si différence de taille entre paramètres attendu et paramètres lus : ERROR
+		if (this.parameters.size() != this.parametreATester.size()) {
+			System.out.println("Erreur : nombre de paramètres attendu : "+this.parameters.size()+" Nombre de paramètres lus : "+this.parametreATester.size()+". Ligne "+SimpleCharStream.getEndLine()+"\n");
+			// Abbiamo vidato tutte le due pile
+			this.parameters.clear();
+			this.parametreATester.clear();
+		}
+		// Sinon contrôle de type
+		else {
+			while (!this.parameters.empty()) {
+				Type typeParamAttendu = this.parameters.pop().getType();
+				Type typeParamATester = this.parametreATester.pop();
+				
+				if (typeParamAttendu.ordinal() != typeParamATester.ordinal()) {
+					System.out.println("Erreur : Mauvais type de paramètre, attendu "+typeParamAttendu.toString()+" Type du paramètre donné : "+typeParamATester.toString()+". Ligne "+SimpleCharStream.getEndLine()+"\n");
+				}
+			}
+		}
+		
+	}
 	
-
 }
 

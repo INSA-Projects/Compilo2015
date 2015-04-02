@@ -92,7 +92,7 @@ public class TabIdent
 		locaux.put(s, i);
 	}
 	
-	
+
 
 }
 
