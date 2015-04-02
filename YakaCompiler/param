@@ -1,0 +1,23 @@
+
+entete
+
+ouvrePrinc 6
+
+iload -1
+
+iload -6
+
+iload -1
+
+iffaux SINON1
+
+iload -6
+
+goto FSI1
+
+SINON1 :
+
+iload -1
+
+FSI1 :
+

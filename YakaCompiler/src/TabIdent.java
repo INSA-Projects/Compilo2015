@@ -107,6 +107,17 @@ public class TabIdent
 		}
 	}
 	
+	public int getNbVariable(){
+		int cpt =0;
+		for (String mapKey : locaux.keySet()) {
+			if (locaux.get(mapKey).getValue()<0){
+				cpt++;
+			}
+		}
+		return cpt;
+	}
+	
+	
 	
 
 }

@@ -571,9 +571,11 @@ public class Yaka implements YakaConstants {
     type();
     jj_consume_token(FONCTION);
     jj_consume_token(ident);
+                 declaration.setFunction(YakaTokenManager.identLu);
     paramForms();
     bloc();
     jj_consume_token(FFONCTION);
+         tabIdent.clearLoco();
   }
 
   static final public void paramForms() throws ParseException {
@@ -604,6 +606,7 @@ public class Yaka implements YakaConstants {
   }
 
   static final public void paramForm() throws ParseException {
+         tabIdent.cptParam++;
     type();
     jj_consume_token(ident);
   }
@@ -637,12 +640,14 @@ public class Yaka implements YakaConstants {
       jj_la1[27] = jj_gen;
       ;
     }
+                                                 tabIdent.calculateOffsets();
     jj_consume_token(44);
   }
 
   static final public void retourne() throws ParseException {
     jj_consume_token(RETOURNE);
     expression();
+                      expression.controlTypeFonction(declaration.getType());
   }
 
   static private boolean jj_initialized_once = false;

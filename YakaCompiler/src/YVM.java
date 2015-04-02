@@ -15,6 +15,7 @@ public class YVM
 		allocatedMemory=0;
 		allocParam=2;
 	}
+
 	
 	public void alloc()
 	{
@@ -175,6 +176,14 @@ public class YVM
 	
 	public void fsi(){
 		Ecriture.ecrireString(Yaka.YVMfilename, "FSI"+this.condEtiq.pop()+" :\n");
+	}
+	
+	public void etiquette(String s){
+		Ecriture.ecrireString(Yaka.YVMfilename, s+":\n");
+	}
+	
+	public void ouvBloc (entier i){
+		Ecriture.ecrireString(Yaka.YVMfilename, "ouvbloc "+i"\n");
 	}
 }
 

@@ -148,7 +148,7 @@ void prog() : {}
 void bloc() : {}{
  (declConst())*
  (declVar())*
- {yvm.ouvrePrinc();}
+ {yvm.ouvBloc(tabIdent.getNbVariable());yvm.ouvrePrinc();}
    suiteInstr() 
 }
 
@@ -329,7 +329,7 @@ void declFonction() : {}
 {
 	type()
 	<FONCTION>
-	<ident> {declaration.setFunction(YakaTokenManager.identLu);}
+	<ident> {declaration.setFunction(YakaTokenManager.identLu); yvm.etiquette(YakaTokenManager.identLu);}
 	paramForms()
 	bloc()
 	<FFONCTION>
