@@ -1,8 +1,8 @@
 
 public class Ident 
 {
-	private Type type;
-	private int value;
+	protected Type type;
+	protected int value;
 	
 	public Ident(Type type, int value) 
 	{
