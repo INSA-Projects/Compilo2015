@@ -17,6 +17,11 @@ public class Declaration {
 		return this.typeVar;
 	}
 	
+	// Getter pour Keyname
+	public String getKeyName() {
+		return this.keyName;
+	}
+	
 	// Déclaration pour une variable ou une fonction
 	public Declaration(Type type) {
 		this.typeVar = type;
@@ -43,9 +48,9 @@ public class Declaration {
 
 	// Ajout dans TabIdent d'une fonction
 	public void setFunction(String key) {
+		this.keyName = key;
 		Function function = new Function(typeVar);
 		Yaka.tabIdent.putIdent(key,function);
-
 	}
 	
 }

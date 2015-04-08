@@ -39,6 +39,11 @@ public class Expression
 		operandes.push(t);
 	}
 	
+	// Peek le type d'opérande
+	public Type peekTypeOperande() {
+		return this.operandes.peek();
+	}
+	
 	// Ajoute un opérateur dans la pile des opérateurs
 	public void pushOperator (Operateur op){
 		operators.push(op);
