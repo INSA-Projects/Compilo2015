@@ -275,7 +275,8 @@ public class YakaToAsm extends YVM
 				+ "\tje SINON"+this.cptCond+"\n");
 	}
 	
-	public void goTo(){
+	public void goTo()
+	{
 		Ecriture.ecrireString(Yaka.ASMfilename,
 				";goto FSI"+this.condEtiq.peek()+
 				"\n"
@@ -291,4 +292,10 @@ public class YakaToAsm extends YVM
 		Ecriture.ecrireString(Yaka.ASMfilename, "FSI"+this.condEtiq.pop()+"\n");
 	}
 	
+	
+	public void ouvBloc (int i)
+	{
+		Ecriture.ecrireString(Yaka.YVMfilename, ";ouvbloc "+i+"\n"
+				+ "enter "+i+",0\n");
+	}
 }

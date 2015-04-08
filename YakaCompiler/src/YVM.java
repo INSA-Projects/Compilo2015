@@ -11,7 +11,8 @@ public class YVM
 	protected int cptCond = 0;
 	protected Stack<Integer> condEtiq = new Stack<Integer>();
 	
-	public void clear (){
+	public void clear ()
+	{
 		allocatedMemory=0;
 		allocParam=2;
 	}
@@ -22,7 +23,8 @@ public class YVM
 		this.allocatedMemory += 2;
 	}
 	
-	public void addAllocParam(){
+	public void addAllocParam()
+	{
 		this.allocParam+=2;
 	}
 	public void entete()
@@ -106,7 +108,8 @@ public class YVM
 		Ecriture.ecrireString(Yaka.YVMfilename, "iand\n");
 	}
 	
-	public void idiff() {
+	public void idiff() 
+	{
 		Ecriture.ecrireString(Yaka.YVMfilename, "idiff\n");
 	}
 	
@@ -120,11 +123,13 @@ public class YVM
 		Ecriture.ecrireString(Yaka.YVMfilename, "iegal\n");
 	}
 	
-	public void iload(int offset) {
+	public void iload(int offset) 
+	{
 		Ecriture.ecrireString(Yaka.YVMfilename, "iload "+offset+"\n");
 	}
 	
-	public void ecrireChaine(String chaine) {
+	public void ecrireChaine(String chaine) 
+	{
 		Ecriture.ecrireString(Yaka.YVMfilename, "ecrireChaine "+chaine+"\n");
 	}
 	
@@ -133,11 +138,13 @@ public class YVM
 		Ecriture.ecrireString(Yaka.YVMfilename, "aLaLigne\n");
 	}
 	
-	public void lireEnt(int nb){
+	public void lireEnt(int nb)
+	{
 		Ecriture.ecrireString(Yaka.YVMfilename, "lireEnt "+nb+"\n");
 	}
 	
-	public void ecrireEnt(){
+	public void ecrireEnt()
+	{
 		Ecriture.ecrireString(Yaka.YVMfilename, "ecrireEnt\n");
 	}
 	
@@ -149,41 +156,49 @@ public class YVM
 		taquEtiq.push(coptTaq);
 	}
 	
-	public void faire(){
+	public void faire()
+	{
 		Ecriture.ecrireString(Yaka.YVMfilename, "iffaux FAIT"+taquEtiq.peek()+"\n");
 	}
 	
-	public void fait(){
+	public void fait()
+	{
 		Ecriture.ecrireString(Yaka.YVMfilename, "goto FAIRE"+taquEtiq.peek()+"\n");
 		Ecriture.ecrireString(Yaka.YVMfilename, "FAIT"+taquEtiq.pop()+":\n");
 	}
 	
 	
 	// conditionnelle
-	public void iffauxCond(){
+	public void iffauxCond()
+	{
 		this.cptCond++;
 		this.condEtiq.push(this.cptCond);
 		Ecriture.ecrireString(Yaka.YVMfilename, "iffaux SINON"+this.cptCond+"\n");
 	}
 	
-	public void goTo(){
+	public void goTo()
+	{
 		Ecriture.ecrireString(Yaka.YVMfilename, "goto FSI"+this.condEtiq.peek()+"\n");
 	}
 	
-	public void sinon(){
+	public void sinon()
+	{
 		Ecriture.ecrireString(Yaka.YVMfilename, "SINON"+this.condEtiq.peek()+" :\n");
 	}
 	
-	public void fsi(){
+	public void fsi()
+	{
 		Ecriture.ecrireString(Yaka.YVMfilename, "FSI"+this.condEtiq.pop()+" :\n");
 	}
 	
-	public void etiquette(String s){
+	public void etiquette(String s)
+	{
 		Ecriture.ecrireString(Yaka.YVMfilename, s+":\n");
 	}
 	
-	public void ouvBloc (entier i){
-		Ecriture.ecrireString(Yaka.YVMfilename, "ouvbloc "+i"\n");
+	public void ouvBloc (int i)
+	{
+		Ecriture.ecrireString(Yaka.YVMfilename, "ouvbloc "+i+"\n");
 	}
 }
 
