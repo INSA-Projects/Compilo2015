@@ -94,7 +94,7 @@ public class Yaka implements YakaConstants {
       }
       declVar();
     }
-  yvm.ouvrePrinc();
+  yvm.ouvBloc(tabIdent.getNbVariable());yvm.ouvrePrinc();
     suiteInstr();
   }
 
@@ -571,7 +571,7 @@ public class Yaka implements YakaConstants {
     type();
     jj_consume_token(FONCTION);
     jj_consume_token(ident);
-                 declaration.setFunction(YakaTokenManager.identLu);
+                 declaration.setFunction(YakaTokenManager.identLu); yvm.etiquette(YakaTokenManager.identLu);
     paramForms();
     bloc();
     jj_consume_token(FFONCTION);

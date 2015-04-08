@@ -286,9 +286,11 @@ void primaire(): {}
 void valeur() : {}
 { <entier> 	{expression.pushOperande(Type.ENTIER);
 		 yvm.iconst(YakaTokenManager.entierLu);}
+		 
  | <ident> 	{expression.pushOperande(tabIdent.getType(YakaTokenManager.identLu));
  		 expression.accedeIdent(YakaTokenManager.identLu);}	
- (argumentsFonction())?
+ (argumentsFonction())? 
+
  | <VRAI> 	{expression.pushOperande(Type.BOOLEEN);
  		 yvm.iconst(-1);}	
  | <FAUX> 	{expression.pushOperande(Type.BOOLEEN);
@@ -344,14 +346,13 @@ void paramForms() : {}
 void paramForm() : {}
 {
 	{tabIdent.cptParam++;}
-	type()
-	<ident>
-	
+	type() 
+	<ident> {tabIdent.declNewFunctionParam(declaration.getKeyName(),YakaTokenManager.identLu, declaration.getType());}
 }
 
 void argumentsFonction() :{}
 {
-	"(" (expression() ("," expression())*)? {tabIdent.calculateOffsets();}")"
+	"(" (expression() ("," expression())*)? ")" // {tabIdent.calculateOffsets();} ")"
 }
 
 void retourne() : {}

@@ -2,12 +2,20 @@ import java.util.Stack;
 
 public class Function extends Ident
 {
+	
+	// Compteur pour l'offset des paramètres
+	private int offset;
+	
 	// Paramètres de la fonction
 	private Stack<Param> parameters;
 	
 	// Type passés en paramètres lors d'un appel à la fonction
 	private Stack<Type> parametreATester;
 
+	public void setOffset(int offset){
+		this.offset = offset;
+	}
+	
 	public Function(Type t){
 		super(t,0);
 		parameters = new Stack<Param>();
@@ -15,6 +23,16 @@ public class Function extends Ident
 
 	public void addParam(Param p){
 		parameters.push(p);
+	}
+	
+	public void addParamToControl(Type t) {
+		parametreATester.push(t);
+	}
+	
+	// Appelé lors de la déclaration de la fonction : déclaration de paramètre
+	public void declNewParam(Type t, String nom) {
+		Param p = new Param(t,offset,nom);
+		this.addParam(p);
 	}
 	
 	// Effectue le contrôle de type des paramètres de la fonction

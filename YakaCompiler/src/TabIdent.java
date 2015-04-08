@@ -94,7 +94,7 @@ public class TabIdent
 		locaux.put(s, i);
 	}
 	
-	public void calculateOffsets()
+	public int calculateOffsets()
 	{
 		int rang=1;
 		int size = locaux.size();
@@ -105,7 +105,9 @@ public class TabIdent
 			rang ++;
 			// utilise ici hashMap.get(mapKey) pour accéder aux valeurs
 		}
+		return 0;
 	}
+	
 	
 	public int getNbVariable(){
 		int cpt =0;
@@ -115,6 +117,14 @@ public class TabIdent
 			}
 		}
 		return cpt;
+	}
+	
+	public void declNewFunctionParam(String functionName,String parameterName, Type parameterType){
+		Function function = (Function) this.findIdent(functionName);
+		// Calcul de l'offset pour le prochain paramètre
+		function.setOffset(this.calculateOffsets());
+		// Ajout du paramètre à cette fonction
+		function.declNewParam(parameterType, parameterName);
 	}
 	
 	
