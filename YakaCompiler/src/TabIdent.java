@@ -5,9 +5,13 @@ public class TabIdent
 	private HashMap<String,Ident> globaux;
 	private HashMap<String ,Ident> locaux;
 	public int cptParam = 0;
+	public int cptVar = 0;
 	
 	
 
+	public void printMap() {
+		System.out.println("globaux : "+this.globaux.toString()+"\nlocaux"+this.locaux.toString());
+	}
 	
 	/**
 	 * Constructor
@@ -20,13 +24,24 @@ public class TabIdent
 	
 	
 	/**
-	 * Find the ident
+	 * Find the ident : It could be in globaux or locaux
 	 * @param key
 	 * @return
 	 */
 	public Ident findIdent (String key)
 	{
-		return globaux.get(key);
+		if (identExist(key)) {
+			if (globaux.containsKey(key)) {
+				return globaux.get(key);
+			}
+			else {
+				return locaux.get(key);
+			}
+		}
+		else {
+			System.out.println("Ident : "+key+" Erreur cet Ident n'existe pas dans la table des identificateurs ligne "+SimpleCharStream.getEndLine()+"\n");
+			return null;
+		}
 	}
 	
 	/**
@@ -36,7 +51,7 @@ public class TabIdent
 	 */
 	public boolean identExist (String key)
 	{
-		return globaux.containsKey(key);
+		return globaux.containsKey(key) || locaux.containsKey(key);
 	}
 	
 	/**
@@ -44,13 +59,49 @@ public class TabIdent
 	 * @param key
 	 * @param id
 	 */
-	public void putIdent (String key, Ident id)
+	public void putFonction(String key, Function id)
 	{
 		if (identExist(key)) {
 			System.out.println("Ident : "+key+" Erreur cet Ident existe déjà dans la table des identificateurs ligne"+SimpleCharStream.getEndLine()+"\n");
 			return;
 		}
 		globaux.put(key, id);
+	}
+	
+	/**
+	 * Put ident
+	 * @param key
+	 * @param id
+	 */
+	public void putVar (String key, Ident id)
+	{
+		if (identExist(key)) {
+			System.out.println("Ident : "+key+" Erreur cet Ident existe déjà dans la table des identificateurs ligne"+SimpleCharStream.getEndLine()+"\n");
+			return;
+		}
+		this.addLoco(key, id);
+		this.cptVar++;
+		int offset = this.calculateOffsetVar();
+		id.setValue(offset);
+	}
+	
+	public void putConst (String key, Ident id)
+	{
+		if (identExist(key)) {
+			System.out.println("Ident : "+key+" Erreur cet Ident existe déjà dans la table des identificateurs ligne"+SimpleCharStream.getEndLine()+"\n");
+			return;
+		}
+		this.addLoco(key, id);
+	}
+	
+	
+	public int calculateOffsetVar(){
+		return  this.cptVar * (-2);
+	}
+	
+	public int calculateOffsetParam(Param p){
+		Function identFonction = (Function)this.findIdent(Declaration.getNomFonctionEnCours());
+		return  2 * identFonction.tailleParams() + 4- (this.cptParam *2) ;
 	}
 	
 	/**
@@ -61,11 +112,10 @@ public class TabIdent
 	public Type getType (String key)
 	{
 		if (this.identExist(key)){
-			Ident ident = this.globaux.get(key);
+			Ident ident = this.locaux.get(key);
 			return ident.getType();
 		}
 		else {
-			System.out.println("Ident : "+key+" Erreur cet Ident n'existe pas dans la table des identificateurs ligne "+SimpleCharStream.getEndLine()+"\n");
 			return Type.ERREUR;
 		}
 	}
@@ -121,15 +171,13 @@ public class TabIdent
 	
 	public void declNewFunctionParam(String functionName,String parameterName, Type parameterType){
 		Function function = (Function) this.findIdent(functionName);
-		// Calcul de l'offset pour le prochain paramètre
-		function.setOffset(this.calculateOffsets());
 		// Ajout du paramètre à cette fonction
-		function.declNewParam(parameterType, parameterName);
+		Param p = function.declNewParam(parameterType, parameterName);
+		function.setOffset(this.calculateOffsetParam(p));
+		
+		// Ajout du paramètre dans la hash map Locaux
+		this.addLoco(parameterName,p);
 	}
-	
-	
-	
-
 }
 
 

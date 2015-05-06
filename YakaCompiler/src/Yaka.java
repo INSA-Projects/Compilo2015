@@ -10,7 +10,8 @@ public class Yaka implements YakaConstants {
 
   public static void main(String args[]) {
     Yaka analyseur;
-    yvm = new YVM();
+    // yvm = new YVM();
+    yvm = new YakaToAsm();
     tabIdent = new TabIdent();
     expression = new Expression();
 
@@ -609,6 +610,7 @@ public class Yaka implements YakaConstants {
          tabIdent.cptParam++;
     type();
     jj_consume_token(ident);
+                 tabIdent.declNewFunctionParam(declaration.getNomFonctionEnCours(),YakaTokenManager.identLu, declaration.getType());
   }
 
   static final public void argumentsFonction() throws ParseException {
@@ -640,7 +642,6 @@ public class Yaka implements YakaConstants {
       jj_la1[27] = jj_gen;
       ;
     }
-                                                 tabIdent.calculateOffsets();
     jj_consume_token(44);
   }
 

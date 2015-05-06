@@ -17,7 +17,8 @@ public class Yaka {
  
   public static void main(String args[]) { 
     Yaka analyseur;
-    yvm = new YVM();
+    // yvm = new YVM();
+    yvm = new YakaToAsm();
     tabIdent = new TabIdent();
     expression = new Expression();
     
@@ -347,7 +348,7 @@ void paramForm() : {}
 {
 	{tabIdent.cptParam++;}
 	type() 
-	<ident> {tabIdent.declNewFunctionParam(declaration.getKeyName(),YakaTokenManager.identLu, declaration.getType());}
+	<ident> {tabIdent.declNewFunctionParam(declaration.getNomFonctionEnCours(),YakaTokenManager.identLu, declaration.getType());}
 }
 
 void argumentsFonction() :{}

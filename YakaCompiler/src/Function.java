@@ -2,7 +2,7 @@ import java.util.Stack;
 
 public class Function extends Ident
 {
-	
+	private int cptParam;
 	// Compteur pour l'offset des paramètres
 	private int offset;
 	
@@ -21,7 +21,12 @@ public class Function extends Ident
 		parameters = new Stack<Param>();
 	}
 
+	public int tailleParams(){
+		return parameters.size();
+	}
 	public void addParam(Param p){
+		p.value = cptParam;
+		cptParam ++;
 		parameters.push(p);
 	}
 	
@@ -30,9 +35,10 @@ public class Function extends Ident
 	}
 	
 	// Appelé lors de la déclaration de la fonction : déclaration de paramètre
-	public void declNewParam(Type t, String nom) {
+	public Param declNewParam(Type t, String nom) {
 		Param p = new Param(t,offset,nom);
 		this.addParam(p);
+		return p;
 	}
 	
 	// Effectue le contrôle de type des paramètres de la fonction
