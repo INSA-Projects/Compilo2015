@@ -26,5 +26,9 @@ public class Ident
 		this.value = v;
 	}
 	
+	public String toString(){
+		return "Ident de type :"+this.type+" et de value "+this.value;
+	}
+	
 	
 }

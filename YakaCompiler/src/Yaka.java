@@ -575,7 +575,10 @@ public class Yaka implements YakaConstants {
          Type typeDeRetour = declaration.getType();
     jj_consume_token(FONCTION);
     jj_consume_token(ident);
-                 declaration.fonctionEnCours = new Function(YakaTokenManager.identLu, typeDeRetour);
+                        declaration.fonctionEnCours=YakaTokenManager.identLu;
+                                System.out.println("fonction en cours"+declaration.fonctionEnCours);
+                                new Function(YakaTokenManager.identLu, typeDeRetour);
+                                System.out.println(tabIdent.globauxToString());
     paramForms();
     bloc();
     jj_consume_token(FFONCTION);
@@ -606,14 +609,15 @@ public class Yaka implements YakaConstants {
       ;
     }
     jj_consume_token(44);
-                                                    declaration.fonctionEnCours.calculerOffsetsDesParametres();
+                                                    declaration.UpdateOffsetsEnCours();
   }
 
   static final public void paramForm() throws ParseException {
     type();
-                Type typeDuParametre = declaration.getType();
+         Type typeDuParametre = declaration.getType();
     jj_consume_token(ident);
-                                declaration.fonctionEnCours.addParametre(new Param(YakaTokenManager.identLu, typeDuParametre));
+                        System.out.println("type du param \u00e0 ajouter :"+typeDuParametre);
+                                declaration.addParamFonctionEnCours(new Param(YakaTokenManager.identLu, typeDuParametre));
   }
 
   static final public void argumentsFonction() throws ParseException {

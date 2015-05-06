@@ -8,7 +8,7 @@ public class Declaration {
 	private static int offset = -2;
 	
 	// Fonction en cours de déclaration
-	public static Function fonctionEnCours;
+	public static String fonctionEnCours;
 
 	
 	// Déclaration pour une constante
@@ -29,8 +29,15 @@ public class Declaration {
 	public String getKeyName() {
 		return this.keyName;
 	}
+	//ajoute un param dans la fonction en cours dans la table des globaux
+	public void addParamFonctionEnCours(Param p){
+		System.out.println("addParamFonctionEnCours du param"+p.toString()+"dans la fonction"+fonctionEnCours);
+		Yaka.tabIdent.ajoutParam(fonctionEnCours, p);
+	}
 	
-
+	public void UpdateOffsetsEnCours(){
+		Yaka.tabIdent.updateOffsetsParam(fonctionEnCours);
+	}
 	
 	// Déclaration pour une variable ou une fonction
 	public Declaration(Type type) {
@@ -50,6 +57,7 @@ public class Declaration {
 		offset-=2;
 		Yaka.tabIdent.putVar(key,ident);
 	}
+	
 	
 	public void setParam (String key, Type type){
 		Ident ident = new Ident(type, 0);

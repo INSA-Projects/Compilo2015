@@ -22,6 +22,9 @@ public class TabIdent
 		this.locaux = new HashMap<String, Ident>();
 	}
 	
+	public String globauxToString(){
+		return globaux.toString();
+	}
 	
 	/**
 	 * Find the ident : It could be in globaux or locaux
@@ -168,6 +171,19 @@ public class TabIdent
 			}
 		}
 		return cpt;
+	}
+	
+	/*ajoute un parametre à une fonction de locaux */
+	public void ajoutParam(String function,Param p){
+		System.out.println("ajoutParam");
+		this.globaux.put(function,
+						((Function)this.globaux.get(function)).addParametre(p));
+	}
+	
+	/*Met à jour la valeur des offset (champ values) de la fonction "function" dans la table des globaux*/
+	public void updateOffsetsParam (String function){
+		this.globaux.put(function,
+						(((Function)this.globaux.get(function)).calculerOffsetsDesParametres()));
 	}
 	
 }

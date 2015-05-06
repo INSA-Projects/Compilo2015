@@ -3,13 +3,14 @@ import java.util.Stack;
 public class Function extends Ident
 {
 	private int cptParam = 0;
+	private String nom;
 
 	
 	// Paramètres de la fonction
 	private Stack<Param> parameters = new Stack<Param>();
 	
 	// Type passés en paramètres lors d'un appel à la fonction
-	private Stack<Type> parametreATester;
+	private Stack<Type> parametreATester = new Stack<Type>();
 
 	
 
@@ -21,6 +22,7 @@ public class Function extends Ident
 	public Function(String identLu, Type typeDeRetour) 
 	{
 		super(typeDeRetour, 0);
+		this.nom=identLu;
 		
 		Yaka.tabIdent.putFonction(identLu, this);
 	}
@@ -29,21 +31,33 @@ public class Function extends Ident
 	 * 	add parameter to function
 	 * @param param
 	 */
-	public void addParametre(Param param) 
+	public Function addParametre(Param param) 
 	{
 		param.setOffset(cptParam++); // temporaire
 		this.parameters.push(param);
+		System.out.println("addParametre"+this.parameters.toString());
+		return this;
 	}
 	
-	public void calculerOffsetsDesParametres() 
+	public int sizeParam(){
+		return this.cptParam*2;
+	}
+	
+	public Function calculerOffsetsDesParametres() 
 	{
-		// TODO Auto-generated method stub
+		System.out.println(this.toString());
+		for(Param p:parameters){
+			p.setValue(sizeParam()-(2*p.getValue()));
+		}
+		System.out.println("calcul offset de "+this.nom+this.parameters.toString());
+		return this;
 	}
 	
 
 	public int tailleParams(){
 		return parameters.size();
 	}
+
 	
 	
 	public void addParamToControl(Type t) {

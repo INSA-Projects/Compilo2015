@@ -24,4 +24,6 @@ public class Param extends Ident {
 	public void generateIdent() {
 		Yaka.yvm.iload(this.value);
 	}
+	
+	
 }

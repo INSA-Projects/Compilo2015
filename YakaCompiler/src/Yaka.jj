@@ -334,7 +334,10 @@ void declFonction() : {}
 	type()
 	{Type typeDeRetour = declaration.getType();}
 	<FONCTION>
-	<ident> {declaration.fonctionEnCours = new Function(YakaTokenManager.identLu, typeDeRetour);}
+	<ident> {	declaration.fonctionEnCours=YakaTokenManager.identLu;
+				System.out.println("fonction en cours"+declaration.fonctionEnCours);
+				new Function(YakaTokenManager.identLu, typeDeRetour);
+				System.out.println(tabIdent.globauxToString());}
 	paramForms()
 	
 	bloc()
@@ -343,15 +346,15 @@ void declFonction() : {}
 
 void paramForms() : {}
 {
-	"(" (paramForm()  ("," paramForm())*)? ")" {declaration.fonctionEnCours.calculerOffsetsDesParametres();}
+	"(" (paramForm()  ("," paramForm())*)? ")" {declaration.UpdateOffsetsEnCours();}
 }
 
 void paramForm() : {}
 {
-	type() {Type typeDuParametre = declaration.getType();}
-	<ident> {				
-				declaration.fonctionEnCours.addParametre(new Param(YakaTokenManager.identLu, typeDuParametre));
-			}
+	type() 
+	{Type typeDuParametre = declaration.getType();}
+	<ident> {	System.out.println("type du param à ajouter :"+typeDuParametre);
+				declaration.addParamFonctionEnCours(new Param(YakaTokenManager.identLu, typeDuParametre));}
 }
 
 void argumentsFonction() :{}
