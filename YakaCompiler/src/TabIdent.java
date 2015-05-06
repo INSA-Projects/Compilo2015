@@ -26,6 +26,11 @@ public class TabIdent
 	 */
 	public Ident findIdent (String key)
 	{
+		Ident machin = globaux.get(key);
+		if (machin == null)
+		{
+			System.out.println("wow, j'ai pas trouvé ça : "+key);
+		}
 		return globaux.get(key);
 	}
 	
