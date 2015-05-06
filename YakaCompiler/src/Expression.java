@@ -173,6 +173,11 @@ public class Expression
 	// Contrôle si le type affecté correspond au type de l'ident 
 	public void controlTypeAffectation() {
 		Type type1 = operandes.pop();
+		/*
+		System.out.println("dans la pile d'opérandes : "+this.operandes.toString());
+		System.out.println("type à affecter : "+type1.toString());
+		System.out.println("type affected : "+this.identAffected.getType());
+		*/
 		if (type1 == this.identAffected.getType()) {
 			// Affectation correcte
 			Yaka.yvm.istore(Yaka.tabIdent.getValue(nomIdentAffected));
@@ -193,9 +198,9 @@ public class Expression
 	}
 	
 	//-------------------------------------- Fonction --------------------------------------//
-	
+
 	// Pendant la déclaration : contrôle si le type de retour de la fonction correspond au type attendu
-	public void controlTypeFonction(Type typeDecl) {
+	public void controlTypeFonction(Type typeDecl) {		
 		if (typeDecl != this.operandes.peek()) {
 			System.out.println("\nErreur : le type de retour de la fonction ne correspond pas au type attendu "+"("+typeDecl+")"+" ligne "+SimpleCharStream.getEndLine()+"\n");
 		}

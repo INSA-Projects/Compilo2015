@@ -114,7 +114,11 @@ public class TabIdent
 	{
 		if (this.identExist(key)){
 			Ident ident = this.locaux.get(key);
+			if (globaux.containsKey(key)) {
+				ident = globaux.get(key);
+			}
 			return ident.getType();
+			
 		}
 		else {
 			return Type.ERREUR;

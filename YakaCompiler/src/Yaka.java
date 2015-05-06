@@ -10,7 +10,7 @@ public class Yaka implements YakaConstants {
 
   public static void main(String args[]) {
     Yaka analyseur;
-    // yvm = new YVM();
+
     yvm = new YakaToAsm();
     tabIdent = new TabIdent();
     expression = new Expression();
@@ -288,7 +288,7 @@ public class Yaka implements YakaConstants {
                  expression.setIdentAffected(YakaTokenManager.identLu);
     jj_consume_token(42);
     expression();
-                         expression.controlTypeAffectation();
+                          expression.controlTypeAffectation();
   }
 
   static final public void lecture() throws ParseException {
@@ -458,6 +458,7 @@ public class Yaka implements YakaConstants {
         jj_la1[18] = jj_gen;
         ;
       }
+                           ;
       break;
     case VRAI:
       jj_consume_token(VRAI);
@@ -572,7 +573,9 @@ public class Yaka implements YakaConstants {
     type();
     jj_consume_token(FONCTION);
     jj_consume_token(ident);
-                 declaration.setFunction(YakaTokenManager.identLu); yvm.etiquette(YakaTokenManager.identLu);
+                 declaration.setNomFonctionEnCours(YakaTokenManager.identLu);
+                         declaration.setFunction(YakaTokenManager.identLu);
+                         yvm.etiquette(YakaTokenManager.identLu);
     paramForms();
     bloc();
     jj_consume_token(FFONCTION);
@@ -648,7 +651,7 @@ public class Yaka implements YakaConstants {
   static final public void retourne() throws ParseException {
     jj_consume_token(RETOURNE);
     expression();
-                      expression.controlTypeFonction(declaration.getType());
+                                expression.controlTypeFonction(tabIdent.findIdent(Declaration.getNomFonctionEnCours()).getType());
   }
 
   static private boolean jj_initialized_once = false;

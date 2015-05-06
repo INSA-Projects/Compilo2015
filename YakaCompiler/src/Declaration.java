@@ -8,6 +8,7 @@ public class Declaration {
 	private static int offset = -2;
 	// Nom de la fonction en cours de déclaration
 	private static String nomFonctionEnCours;
+
 	
 	// Déclaration pour une constante
 	public Declaration(String ident) {
@@ -29,6 +30,10 @@ public class Declaration {
 		return Declaration.nomFonctionEnCours;
 	}
 	
+	public static void setNomFonctionEnCours(String nom) {
+		nomFonctionEnCours = nom;
+	}
+	
 	// Déclaration pour une variable ou une fonction
 	public Declaration(Type type) {
 		this.typeVar = type;
@@ -38,9 +43,7 @@ public class Declaration {
 	public void setIdent(Type type, int value) {
 		IdConst ident = new IdConst(type, value);
 		Yaka.tabIdent.putConst(keyName,ident);
-		
 		Yaka.tabIdent.printMap();
-		
 	}
 	
 	// Ajout dans TabIdent d'une variable
@@ -59,7 +62,7 @@ public class Declaration {
 	public void setFunction(String key) {
 		this.keyName = key;
 		Declaration.nomFonctionEnCours = key;
-		Function function = new Function(typeVar);
+		Function function = new Function(this.typeVar);
 		Yaka.tabIdent.putFonction(key,function);
 	}
 	
