@@ -100,10 +100,6 @@ public class TabIdent
 		return  this.cptVar * (-2);
 	}
 	
-	public int calculateOffsetParam(Param p){
-		Function identFonction = (Function)this.findIdent(Declaration.getNomFonctionEnCours());
-		return  2 * identFonction.tailleParams() + 4- (this.cptParam *2) ;
-	}
 	
 	/**
 	 * Get the type of the ident 
@@ -174,15 +170,6 @@ public class TabIdent
 		return cpt;
 	}
 	
-	public void declNewFunctionParam(String functionName,String parameterName, Type parameterType){
-		Function function = (Function) this.findIdent(functionName);
-		// Ajout du paramètre à cette fonction
-		Param p = function.declNewParam(parameterType, parameterName);
-		function.setOffset(this.calculateOffsetParam(p));
-		
-		// Ajout du paramètre dans la hash map Locaux
-		this.addLoco(parameterName,p);
-	}
 }
 
 

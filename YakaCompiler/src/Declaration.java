@@ -6,8 +6,9 @@ public class Declaration {
 	private Type typeVar;
 	// Offset de la variable
 	private static int offset = -2;
-	// Nom de la fonction en cours de déclaration
-	private static String nomFonctionEnCours;
+	
+	// Fonction en cours de déclaration
+	public static Function fonctionEnCours;
 
 	
 	// Déclaration pour une constante
@@ -29,14 +30,7 @@ public class Declaration {
 		return this.keyName;
 	}
 	
-	// Getter pour nomFonctionEnCours
-	public static String getNomFonctionEnCours() {
-		return Declaration.nomFonctionEnCours;
-	}
-	
-	public static void setNomFonctionEnCours(String nom) {
-		nomFonctionEnCours = nom;
-	}
+
 	
 	// Déclaration pour une variable ou une fonction
 	public Declaration(Type type) {
@@ -62,12 +56,5 @@ public class Declaration {
 		Yaka.tabIdent.addLoco(key, ident);
 	}
 
-	// Ajout dans TabIdent d'une fonction
-	public void setFunction(String key) {
-		this.keyName = key;
-		Declaration.nomFonctionEnCours = key;
-		Function function = new Function(this.typeVar);
-		Yaka.tabIdent.putFonction(key,function);
-	}
 	
 }

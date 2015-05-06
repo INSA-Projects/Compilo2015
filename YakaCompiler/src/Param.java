@@ -1,11 +1,18 @@
 public class Param extends Ident {
 	protected String nom;
 	
-	public Param(Type type, int offset, String name) {
-		super(type,offset);
-		this.nom = name;
+	
+	public Param(String identLu, Type typeDuParametre) 
+	{
+		super(typeDuParametre, 0);
+		Yaka.tabIdent.addLoco(identLu, this);
 	}
 	
+	public void setOffset(int offset)
+	{
+		super.value = offset;
+	}
+
 	public String toString() {
 		return "Param nom="+nom+" type="+type+" [offset=" + value + "]";
 	}

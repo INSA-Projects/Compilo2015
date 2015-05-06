@@ -572,15 +572,13 @@ public class Yaka implements YakaConstants {
 
   static final public void declFonction() throws ParseException {
     type();
+         Type typeDeRetour = declaration.getType();
     jj_consume_token(FONCTION);
     jj_consume_token(ident);
-                 declaration.setNomFonctionEnCours(YakaTokenManager.identLu);
-                         declaration.setFunction(YakaTokenManager.identLu);
-                         yvm.etiquette(YakaTokenManager.identLu);
+                 declaration.fonctionEnCours = new Function(YakaTokenManager.identLu, typeDeRetour);
     paramForms();
     bloc();
     jj_consume_token(FFONCTION);
-         tabIdent.clearLoco();
   }
 
   static final public void paramForms() throws ParseException {
@@ -608,13 +606,14 @@ public class Yaka implements YakaConstants {
       ;
     }
     jj_consume_token(44);
+                                                    declaration.fonctionEnCours.calculerOffsetsDesParametres();
   }
 
   static final public void paramForm() throws ParseException {
-         tabIdent.cptParam++;
     type();
+                Type typeDuParametre = declaration.getType();
     jj_consume_token(ident);
-                 tabIdent.declNewFunctionParam(declaration.getNomFonctionEnCours(),YakaTokenManager.identLu, declaration.getType());
+                                declaration.fonctionEnCours.addParametre(new Param(YakaTokenManager.identLu, typeDuParametre));
   }
 
   static final public void argumentsFonction() throws ParseException {
@@ -652,7 +651,6 @@ public class Yaka implements YakaConstants {
   static final public void retourne() throws ParseException {
     jj_consume_token(RETOURNE);
     expression();
-                                expression.controlTypeFonction(tabIdent.findIdent(Declaration.getNomFonctionEnCours()).getType());
   }
 
   static private boolean jj_initialized_once = false;

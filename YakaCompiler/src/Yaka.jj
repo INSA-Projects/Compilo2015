@@ -332,42 +332,37 @@ void opNeg() : {}
 void declFonction() : {}
 {
 	type()
+	{Type typeDeRetour = declaration.getType();}
 	<FONCTION>
-	<ident> {declaration.setNomFonctionEnCours(YakaTokenManager.identLu);
-			 declaration.setFunction(YakaTokenManager.identLu);
-			 yvm.etiquette(YakaTokenManager.identLu);
-			 }
+	<ident> {declaration.fonctionEnCours = new Function(YakaTokenManager.identLu, typeDeRetour);}
 	paramForms()
+	
 	bloc()
 	<FFONCTION>
-	{tabIdent.clearLoco();}
 }
 
 void paramForms() : {}
 {
-	"(" (paramForm()  ("," paramForm())*)? ")"
+	"(" (paramForm()  ("," paramForm())*)? ")" {declaration.fonctionEnCours.calculerOffsetsDesParametres();}
 }
 
 void paramForm() : {}
 {
-	{tabIdent.cptParam++;}
-	type() 
-	<ident> {tabIdent.declNewFunctionParam(declaration.getNomFonctionEnCours(),YakaTokenManager.identLu, declaration.getType());}
-
+	type() {Type typeDuParametre = declaration.getType();}
+	<ident> {				
+				declaration.fonctionEnCours.addParametre(new Param(YakaTokenManager.identLu, typeDuParametre));
+			}
 }
 
 void argumentsFonction() :{}
 {
-	"(" (expression() ("," expression())*)? ")" // {tabIdent.calculateOffsets();} ")"
+	"(" (expression() ("," expression())*)? ")" // {declaration.fonctionEnCours.calculateOffsets();} ")"
 }
 
 void retourne() : {}
 {
 	<RETOURNE>
-	expression() 	{	expression.controlTypeFonction(tabIdent.findIdent(Declaration.getNomFonctionEnCours()).getType()); 
-	
-	
-	 }
+	expression()
 }
 	
 	

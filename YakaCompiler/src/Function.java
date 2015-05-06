@@ -2,44 +2,54 @@ import java.util.Stack;
 
 public class Function extends Ident
 {
-	private int cptParam;
-	// Compteur pour l'offset des paramètres
-	private int offset;
+	private int cptParam = 0;
+
 	
 	// Paramètres de la fonction
-	private Stack<Param> parameters;
+	private Stack<Param> parameters = new Stack<Param>();
 	
 	// Type passés en paramètres lors d'un appel à la fonction
 	private Stack<Type> parametreATester;
 
-	public void setOffset(int offset){
-		this.offset = offset;
+	
+
+	/**
+	 * Constructor
+	 * @param identLu
+	 * @param typeDeRetour
+	 */
+	public Function(String identLu, Type typeDeRetour) 
+	{
+		super(typeDeRetour, 0);
+		
+		Yaka.tabIdent.putFonction(identLu, this);
 	}
 	
-	public Function(Type t){
-		super(t,0);
-		parameters = new Stack<Param>();
+	/**
+	 * 	add parameter to function
+	 * @param param
+	 */
+	public void addParametre(Param param) 
+	{
+		param.setOffset(cptParam++); // temporaire
+		this.parameters.push(param);
 	}
+	
+	public void calculerOffsetsDesParametres() 
+	{
+		// TODO Auto-generated method stub
+	}
+	
 
 	public int tailleParams(){
 		return parameters.size();
 	}
-	public void addParam(Param p){
-		p.value = cptParam;
-		cptParam ++;
-		parameters.push(p);
-	}
+	
 	
 	public void addParamToControl(Type t) {
 		parametreATester.push(t);
 	}
-	
-	// Appelé lors de la déclaration de la fonction : déclaration de paramètre
-	public Param declNewParam(Type t, String nom) {
-		Param p = new Param(t,offset,nom);
-		this.addParam(p);
-		return p;
-	}
+
 	
 	// Effectue le contrôle de type des paramètres de la fonction
 	public void controlTypeParam() {
@@ -64,6 +74,13 @@ public class Function extends Ident
 		}
 		
 	}
+
+
+
+
+
+
+	
 	
 }
 
