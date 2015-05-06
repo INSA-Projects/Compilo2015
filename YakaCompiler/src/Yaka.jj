@@ -17,7 +17,7 @@ public class Yaka {
  
   public static void main(String args[]) { 
     Yaka analyseur;
-    // yvm = new YVM();
+
     yvm = new YakaToAsm();
     tabIdent = new TabIdent();
     expression = new Expression();
@@ -138,7 +138,7 @@ TOKEN  :
 /**************************************/
 void prog() : {}
 {
-   <PROGRAMME>  <ident> {YVMfilename = YakaTokenManager.identLu; yvm.entete();}	
+   <PROGRAMME>  <ident> {YVMfilename = YakaTokenManager.identLu; yvm.entete();}
    (declFonction())*
    <PRINCIPAL>
    bloc()
@@ -332,7 +332,10 @@ void declFonction() : {}
 {
 	type()
 	<FONCTION>
-	<ident> {declaration.setFunction(YakaTokenManager.identLu); yvm.etiquette(YakaTokenManager.identLu);}
+	<ident> {declaration = new Declaration(YakaTokenManager.identLu);
+			 declaration.setFunction(YakaTokenManager.identLu);
+			 yvm.etiquette(YakaTokenManager.identLu);
+			 }
 	paramForms()
 	bloc()
 	<FFONCTION>
@@ -349,6 +352,7 @@ void paramForm() : {}
 	{tabIdent.cptParam++;}
 	type() 
 	<ident> {tabIdent.declNewFunctionParam(declaration.getNomFonctionEnCours(),YakaTokenManager.identLu, declaration.getType());}
+
 }
 
 void argumentsFonction() :{}
@@ -359,7 +363,9 @@ void argumentsFonction() :{}
 void retourne() : {}
 {
 	<RETOURNE>
-	expression() {expression.controlTypeFonction(declaration.getType());}
+	expression() 	{	expression.controlTypeFonction(declaration.getType());
+						tabIdent.clearLoco();
+					}
 }
 	
 	

@@ -295,7 +295,9 @@ public class YakaToAsm extends YVM
 	
 	public void ouvBloc (int i)
 	{
-		Ecriture.ecrireString(Yaka.YVMfilename, ";ouvbloc "+i+"\n"
+		Ecriture.ecrireString(Yaka.ASMfilename, ";ouvbloc "+i+"\n"
 				+ "enter "+i+",0\n");
 	}
+	
+	
 }

@@ -42,6 +42,7 @@ public class TabIdent
 			System.out.println("Ident : "+key+" Erreur cet Ident n'existe pas dans la table des identificateurs ligne "+SimpleCharStream.getEndLine()+"\n");
 			return null;
 		}
+
 	}
 	
 	/**
