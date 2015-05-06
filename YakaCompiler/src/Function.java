@@ -39,10 +39,12 @@ public class Function extends Ident
 		return this;
 	}
 	
+	// aide au calcul des offset
 	public int sizeParam(){
 		return this.cptParam*2;
 	}
 	
+	//on fait un for each sur la pile, pas sur que ça marche
 	public Function calculerOffsetsDesParametres() 
 	{
 		System.out.println(this.toString());
@@ -53,7 +55,7 @@ public class Function extends Ident
 		return this;
 	}
 	
-
+	//getter quelconque
 	public int tailleParams(){
 		return parameters.size();
 	}

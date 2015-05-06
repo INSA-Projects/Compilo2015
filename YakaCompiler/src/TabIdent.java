@@ -22,6 +22,7 @@ public class TabIdent
 		this.locaux = new HashMap<String, Ident>();
 	}
 	
+	//getter classique
 	public String globauxToString(){
 		return globaux.toString();
 	}
@@ -98,7 +99,7 @@ public class TabIdent
 		this.addLoco(key, id);
 	}
 	
-	
+	//attribut nu offset à une variable
 	public int calculateOffsetVar(){
 		return  this.cptVar * (-2);
 	}

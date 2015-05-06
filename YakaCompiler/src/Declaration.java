@@ -7,7 +7,8 @@ public class Declaration {
 	// Offset de la variable
 	private static int offset = -2;
 	
-	// Fonction en cours de déclaration
+	// Fonction en cours de déclaration, ce n'est plus un objet fonction car 
+	//une copie ne sers à rien, on garde que le contenu de globaux
 	public static String fonctionEnCours;
 
 	
@@ -16,6 +17,7 @@ public class Declaration {
 		this.keyName = ident;
 	}
 	
+	//
 	public void setType(Type type){
 		this.typeVar=type;
 	}
@@ -35,6 +37,7 @@ public class Declaration {
 		Yaka.tabIdent.ajoutParam(fonctionEnCours, p);
 	}
 	
+	//fonction qui update les offsets des parametre de la fonction en cours
 	public void UpdateOffsetsEnCours(){
 		Yaka.tabIdent.updateOffsetsParam(fonctionEnCours);
 	}
@@ -45,6 +48,7 @@ public class Declaration {
 	}
 	
 	// Ajout dans TabIdent d'une constante
+	//TODO attention DANGER !
 	public void setIdent(Type type, int value) {
 		IdConst ident = new IdConst(type, value);
 		Yaka.tabIdent.putConst(keyName,ident);
@@ -52,6 +56,7 @@ public class Declaration {
 	}
 	
 	// Ajout dans TabIdent d'une variable
+	//TODO deux setIdent, trop dangereux, a changer
 	public void setIdent(String key){
 		IdVar ident = new IdVar(typeVar, offset);
 		offset-=2;
