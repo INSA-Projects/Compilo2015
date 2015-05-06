@@ -21,6 +21,7 @@ public class Yaka {
     yvm = new YakaToAsm();
     tabIdent = new TabIdent();
     expression = new Expression();
+    declaration = new Declaration("");
     
     java.io.InputStream input;
 
@@ -186,8 +187,8 @@ void declVar() : {}
 
 void type() :{}
 {
-   <ENTIER> {declaration = new Declaration(Type.ENTIER);}		
- | <BOOLEEN> {declaration = new Declaration(Type.BOOLEEN);}	
+   <ENTIER> {declaration.setType(Type.ENTIER);}		
+ | <BOOLEEN> {declaration.setType(Type.BOOLEEN);}	
 }
 /*
  * Syntaxe des instructions.

@@ -15,6 +15,10 @@ public class Declaration {
 		this.keyName = ident;
 	}
 	
+	public void setType(Type type){
+		this.typeVar=type;
+	}
+	
 	// Getter pour typeVar
 	public Type getType() {
 		return this.typeVar;

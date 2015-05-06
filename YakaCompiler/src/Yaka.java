@@ -14,6 +14,7 @@ public class Yaka implements YakaConstants {
     yvm = new YakaToAsm();
     tabIdent = new TabIdent();
     expression = new Expression();
+    declaration = new Declaration("");
 
     java.io.InputStream input;
 
@@ -176,11 +177,11 @@ public class Yaka implements YakaConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case ENTIER:
       jj_consume_token(ENTIER);
-             declaration = new Declaration(Type.ENTIER);
+             declaration.setType(Type.ENTIER);
       break;
     case BOOLEEN:
       jj_consume_token(BOOLEEN);
-              declaration = new Declaration(Type.BOOLEEN);
+              declaration.setType(Type.BOOLEEN);
       break;
     default:
       jj_la1[6] = jj_gen;
