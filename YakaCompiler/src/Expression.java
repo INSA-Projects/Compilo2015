@@ -44,6 +44,10 @@ public class Expression
 		return this.operandes.peek();
 	}
 	
+	public Type popTypeOperande() {
+		return this.operandes.pop();
+	}
+	
 	// Ajoute un opérateur dans la pile des opérateurs
 	public void pushOperator (Operateur op){
 		operators.push(op);
@@ -199,6 +203,24 @@ public class Expression
 	
 	//-------------------------------------- Fonction --------------------------------------//
 
+	private Stack<Function> fonctionsAppelees = new Stack<Function>();
+	public static String nomFonctionAppelee;
+	
+	public void addFonctionAppelee(Function f) {
+		this.fonctionsAppelees.push(f);
+	}
+	
+	public void removeFonctionAppelee() {
+		this.fonctionsAppelees.pop();
+	}
+	
+	public Function getFonctionAppelee() {
+		return this.fonctionsAppelees.peek();
+	}
+	
+	public static Function fonctionAppelee;
+
+	
 	// Pendant la déclaration : contrôle si le type de retour de la fonction correspond au type attendu
 	public void controlTypeFonction(Type typeDecl) {		
 		if (typeDecl != this.operandes.peek()) {

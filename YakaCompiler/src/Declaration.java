@@ -8,7 +8,7 @@ public class Declaration {
 	private static int offset = -2;
 	
 	// Fonction en cours de déclaration
-	public static Function fonctionEnCours;
+	public static Function fonctionDeclaration;
 
 	
 	// Déclaration pour une constante
@@ -32,7 +32,7 @@ public class Declaration {
 	
 
 	
-	// Déclaration pour une variable ou une fonction
+	// Déclaration pour une variable
 	public Declaration(Type type) {
 		this.typeVar = type;
 	}

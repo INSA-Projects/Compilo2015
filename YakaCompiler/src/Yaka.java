@@ -451,6 +451,8 @@ public class Yaka implements YakaConstants {
       jj_consume_token(ident);
                  expression.pushOperande(tabIdent.getType(YakaTokenManager.identLu));
                  expression.accedeIdent(YakaTokenManager.identLu);
+                 // Cas où l'ident est un nom de fonction
+                 expression.nomFonctionAppelee = YakaTokenManager.identLu;
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case 46:
         argumentsFonction();
@@ -459,7 +461,6 @@ public class Yaka implements YakaConstants {
         jj_la1[18] = jj_gen;
         ;
       }
-                           ;
       break;
     case VRAI:
       jj_consume_token(VRAI);
@@ -572,13 +573,19 @@ public class Yaka implements YakaConstants {
 
   static final public void declFonction() throws ParseException {
     type();
-         Type typeDeRetour = declaration.getType();
     jj_consume_token(FONCTION);
+           // creation de la fonction
+        Declaration.fonctionDeclaration = new Function(declaration.getType());
     jj_consume_token(ident);
-                 declaration.fonctionEnCours = new Function(YakaTokenManager.identLu, typeDeRetour);
+          // mémorisation du nom de la fonction dans la variable nomFonctionDeclaration
+        String nomFonctionDeclaration = YakaTokenManager.identLu;
     paramForms();
     bloc();
     jj_consume_token(FFONCTION);
+                 // ajout de la fonction dans tabIdent
+        tabIdent.putFonction(nomFonctionDeclaration, Declaration.fonctionDeclaration);
+        // Reset des locaux dans tabIdent
+        tabIdent.clearLoco();
   }
 
   static final public void paramForms() throws ParseException {
@@ -606,18 +613,20 @@ public class Yaka implements YakaConstants {
       ;
     }
     jj_consume_token(44);
-                                                    declaration.fonctionEnCours.calculerOffsetsDesParametres();
+                                                    Declaration.fonctionDeclaration.calculerOffsetsDesParametres();
   }
 
   static final public void paramForm() throws ParseException {
     type();
                 Type typeDuParametre = declaration.getType();
     jj_consume_token(ident);
-                                declaration.fonctionEnCours.addParametre(new Param(YakaTokenManager.identLu, typeDuParametre));
+                                //	ajout du paramètre à la fonction en cours de déclaration : fonctionDeclaration (voir declFonction())		
+                                Declaration.fonctionDeclaration.addParametre(new Param(YakaTokenManager.identLu, typeDuParametre));
   }
 
   static final public void argumentsFonction() throws ParseException {
     jj_consume_token(46);
+             expression.addFonctionAppelee((Function) tabIdent.findIdent(Expression.nomFonctionAppelee));
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case VRAI:
     case FAUX:
@@ -627,6 +636,7 @@ public class Yaka implements YakaConstants {
     case 46:
     case 53:
       expression();
+         expression.getFonctionAppelee().addParamToControl(expression.popTypeOperande());
       label_10:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -639,6 +649,7 @@ public class Yaka implements YakaConstants {
         }
         jj_consume_token(40);
         expression();
+         expression.getFonctionAppelee().addParamToControl(expression.popTypeOperande());
       }
       break;
     default:
@@ -646,6 +657,9 @@ public class Yaka implements YakaConstants {
       ;
     }
     jj_consume_token(44);
+         expression.getFonctionAppelee().controlTypeParam();
+                // Depiler la pile de fonctions
+                expression.removeFonctionAppelee();
   }
 
   static final public void retourne() throws ParseException {

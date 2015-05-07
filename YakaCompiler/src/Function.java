@@ -9,7 +9,7 @@ public class Function extends Ident
 	private Stack<Param> parameters = new Stack<Param>();
 	
 	// Type passés en paramètres lors d'un appel à la fonction
-	private Stack<Type> parametreATester;
+	private Stack<Type> parametreATester = new Stack<Type>();
 
 	
 
@@ -18,42 +18,50 @@ public class Function extends Ident
 	 * @param identLu
 	 * @param typeDeRetour
 	 */
-	public Function(String identLu, Type typeDeRetour) 
+	public Function(Type typeDeRetour) 
 	{
 		super(typeDeRetour, 0);
-		
-		Yaka.tabIdent.putFonction(identLu, this);
 	}
 	
+	/* ---------- méthides appelées lors de la déclaration de la fonction ---------- */
 	/**
 	 * 	add parameter to function
 	 * @param param
 	 */
 	public void addParametre(Param param) 
 	{
-		param.setOffset(cptParam++); // temporaire
+		cptParam++;
+		param.setOffset(cptParam); 
+		// temporaire
 		this.parameters.push(param);
 	}
 	
+	// calcule l'offset (dans la pile de la fonction) de chaque paramètre  
 	public void calculerOffsetsDesParametres() 
 	{
-		// TODO Auto-generated method stub
+		for (Param param : parameters){
+			param.setOffset(4 + this.tailleParams() - 2 * param.getValue()); // formule à vérifier
+		}
 	}
 	
-
+// retourne la taille du bloc à reserver pour les paramètres dans dans la pile de la fonction
 	public int tailleParams(){
-		return parameters.size();
+		return parameters.size()*2;
 	}
 	
 	
+	/* ----------- méthodes appelées lors de l'appel de la fonction ---------- */
+	
+	// ajoute le type du paramètre à controler lors d'un appel de la fonction
 	public void addParamToControl(Type t) {
 		parametreATester.push(t);
 	}
 
 	
-	// Effectue le contrôle de type des paramètres de la fonction
+	// Effectue le contrôle de type des paramètres lors de l'appel de la fonction
 	public void controlTypeParam() {
-		System.out.println("parameters : "+this.parameters.toString()+"\nparametereATester :"+this.parametreATester.toString());
+		System.out.println("parameters function"+this.toString()+ " : "+this.parameters.toString()+"\nparametereATester :"+this.parametreATester.toString());
+		
 		// Si différence de taille entre paramètres attendu et paramètres lus : ERROR
 		if (this.parameters.size() != this.parametreATester.size()) {
 			System.out.println("Erreur : nombre de paramètres attendu : "+this.parameters.size()+" Nombre de paramètres lus : "+this.parametreATester.size()+". Ligne "+SimpleCharStream.getEndLine()+"\n");
@@ -63,11 +71,11 @@ public class Function extends Ident
 		}
 		// Sinon contrôle de type
 		else {
-			while (!this.parameters.empty()) {
-				Type typeParamAttendu = this.parameters.pop().getType();
+			for(int i = 0; i<parameters.size();i++) {
+				Type typeParamAttendu = this.parameters.elementAt(i).getType();
 				Type typeParamATester = this.parametreATester.pop();
 				
-				if (typeParamAttendu.ordinal() != typeParamATester.ordinal()) {
+				if (typeParamAttendu !=  typeParamATester) {
 					System.out.println("Erreur : Mauvais type de paramètre, attendu "+typeParamAttendu.toString()+" Type du paramètre donné : "+typeParamATester.toString()+". Ligne "+SimpleCharStream.getEndLine()+"\n");
 				}
 			}
