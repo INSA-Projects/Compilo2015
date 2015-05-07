@@ -50,7 +50,7 @@ public class Yaka implements YakaConstants {
   static final public void prog() throws ParseException {
     jj_consume_token(PROGRAMME);
     jj_consume_token(ident);
-                         YVMfilename = YakaTokenManager.identLu; yvm.entete();
+                         YVMfilename = YakaTokenManager.identLu;yvm.entete();
     label_1:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -65,6 +65,7 @@ public class Yaka implements YakaConstants {
       declFonction();
     }
     jj_consume_token(PRINCIPAL);
+               yvm.enteteMain();
     bloc();
     jj_consume_token(FPRINCIPAL);
     jj_consume_token(FPROGRAMME);

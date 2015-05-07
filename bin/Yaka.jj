@@ -139,9 +139,9 @@ TOKEN  :
 /**************************************/
 void prog() : {}
 {
-   <PROGRAMME>  <ident> {YVMfilename = YakaTokenManager.identLu; yvm.entete();}
+   <PROGRAMME>  <ident> {YVMfilename = YakaTokenManager.identLu;yvm.entete(); }
    (declFonction())*
-   <PRINCIPAL>
+   <PRINCIPAL>{yvm.enteteMain();}
    bloc()
    <FPRINCIPAL>
    <FPROGRAMME> {yvm.queue();}

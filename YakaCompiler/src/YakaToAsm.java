@@ -29,10 +29,16 @@ public class YakaToAsm extends YVM
 				+ "\textrn ecrch:proc, ligsuiv:proc\n"
 				+ ".model SMALL\n"
 				+ ".586\n"
-				+ ".CODE\n"
-				+ "debut :\n"
-				+ "\tSTARTUPCODE\n");
+				+ ".CODE\n");
 	}
+	
+	public void enteteMain()
+	{
+		this.write("debut :\n"
+					+ "\tSTARTUPCODE\n"
+				+"\tmain :\n");
+	}
+	
 	
 	public void queue()
 	{
@@ -278,7 +284,7 @@ public class YakaToAsm extends YVM
 		Ecriture.ecrireString(Yaka.ASMfilename,
 				";goto FSI"+this.condEtiq.peek()+
 				"\n"
-				+ "\tgoto FSI"+this.condEtiq.peek()+"\n");
+				+ "\tjmp FSI"+this.condEtiq.peek()+"\n");
 	}
 	
 	public void sinon(){
@@ -287,7 +293,7 @@ public class YakaToAsm extends YVM
 	}
 	
 	public void fsi(){
-		Ecriture.ecrireString(Yaka.ASMfilename, "FSI"+this.condEtiq.pop()+"\n");
+		Ecriture.ecrireString(Yaka.ASMfilename, "FSI"+this.condEtiq.pop()+" :\n");
 	}
 	
 	
@@ -307,7 +313,7 @@ public class YakaToAsm extends YVM
 	}
 	
 	public void retourne(int taille){
-		write("; ireturn "+taille+"\n"+"pop ax"+"\n"+"mov [bp+"+taille+",ax]"+"\n");
+		write("; ireturn "+taille+"\n"+"pop ax"+"\n"+"mov [bp+"+taille+"],ax"+"\n");
 	}
 	
 	public void fermeBloc(int taille) {
