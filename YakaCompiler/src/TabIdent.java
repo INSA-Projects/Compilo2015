@@ -1,4 +1,6 @@
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class TabIdent 
 {
@@ -7,7 +9,9 @@ public class TabIdent
 	public int cptParam = 0;
 	public int cptVar = 0;
 	
-	
+	public int tailleLocaux(){
+		return cptVar * 2; 
+	}
 
 	public void printMap() {
 		System.out.println("globaux : "+this.globaux.toString()+"\nlocaux"+this.locaux.toString());
@@ -21,7 +25,6 @@ public class TabIdent
 		this.globaux = new HashMap<String, Ident>();
 		this.locaux = new HashMap<String, Ident>();
 	}
-	
 	
 	/**
 	 * Find the ident : It could be in globaux or locaux

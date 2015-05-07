@@ -3,7 +3,7 @@ public class Yaka implements YakaConstants {
   public static Declaration declaration;
   public static TabIdent tabIdent;
   public static Expression expression;
-  public static YVM yvm;
+  public static YakaToAsm yvm;
   public static final String ASMfilename = "org.asm";
   //public static final String YVMfilename = "code.jpeg";
   public static String YVMfilename;
@@ -96,7 +96,8 @@ public class Yaka implements YakaConstants {
       }
       declVar();
     }
-  yvm.ouvBloc(tabIdent.getNbVariable());yvm.ouvrePrinc();
+  //ouvbloc : utilise le nombre de variables locales
+        yvm.ouvreBlocFonction(tabIdent.tailleLocaux());
     suiteInstr();
   }
 
@@ -579,6 +580,8 @@ public class Yaka implements YakaConstants {
     jj_consume_token(ident);
           // mémorisation du nom de la fonction dans la variable nomFonctionDeclaration
         String nomFonctionDeclaration = YakaTokenManager.identLu;
+         // génération de l'entete de la fonction
+        yvm.enteteFonction(nomFonctionDeclaration);
     paramForms();
     bloc();
     jj_consume_token(FFONCTION);
@@ -586,6 +589,7 @@ public class Yaka implements YakaConstants {
         tabIdent.putFonction(nomFonctionDeclaration, Declaration.fonctionDeclaration);
         // Reset des locaux dans tabIdent
         tabIdent.clearLoco();
+         yvm.fermeBloc(Declaration.fonctionDeclaration.tailleParams());
   }
 
   static final public void paramForms() throws ParseException {
@@ -664,6 +668,8 @@ public class Yaka implements YakaConstants {
 
   static final public void retourne() throws ParseException {
     jj_consume_token(RETOURNE);
+         // retourne : utilise tailleParam+2
+        yvm.retourne(Declaration.fonctionDeclaration.tailleParams()+4);
     expression();
   }
 

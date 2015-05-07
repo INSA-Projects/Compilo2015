@@ -11,7 +11,6 @@ public class YakaToAsm extends YVM
 	public void test()
 	{
 		this.entete();
-		this.ouvrePrinc();
 		this.iconst(10);
 		this.idiv();
 		this.iadd();
@@ -42,14 +41,7 @@ public class YakaToAsm extends YVM
 				+ "\tEXITCODE\n"
 				+ "\tEND debut\n");
 	}
-	
-	public void ouvrePrinc()
-	{
-		this.write("; ouvrePrinc "+this.allocatedMemory+"\n"
-				+ "\tmov bp,sp\n"
-				+ "\tsub sp,"+this.allocatedMemory+"\n");
-	}
-	
+
 	public void iconst(int value)
 	{
 		this.write("; iconst "+value+"\n"
@@ -208,8 +200,14 @@ public class YakaToAsm extends YVM
 	
 	public void iload(int value)
 	{
-		this.write("; iload "+value+"\n"
+		if(value<0){
+			this.write("; iload "+value+"\n"
 				+ "\tpush word ptr [bp"+value+"]\n"); 
+		}
+		else{
+			this.write("; iload "+value+"\n"
+					+ "\tpush word ptr [bp+"+value+"]\n"); 
+		}
 	}
 	
 	public void ecrireChaine(String chaine) {
@@ -298,6 +296,24 @@ public class YakaToAsm extends YVM
 		Ecriture.ecrireString(Yaka.ASMfilename, ";ouvbloc "+i+"\n"
 				+ "enter "+i+",0\n");
 	}
+	
+	public void enteteFonction(String nomFonction){
+		write(nomFonction+":\n");
+	}
+	
+	public void ouvreBlocFonction(int taille){
+		write("; ouvbloc fonction "+taille+"\n"
+				+ "enter "+taille+",0\n");
+	}
+	
+	public void retourne(int taille){
+		write("; ireturn "+taille+"\n"+"pop ax"+"\n"+"mov [bp+"+taille+",ax]"+"\n");
+	}
+	
+	public void fermeBloc(int taille) {
+		write("; fermebloc"+taille+"\n"+"leave"+"\n"+"ret "+taille+"\n");
+	}
+	
 	
 	
 }
