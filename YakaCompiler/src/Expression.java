@@ -26,11 +26,13 @@ public class Expression
 	private  Stack<Operateur> operators;
 	// Pile des opérandes dans une expression
 	private  Stack<Type> operandes;
+	private Stack<Ident> operandesIdent;
 	
 
 	// Constructeur d'Expression
 	public Expression(){
 		this.operandes=new Stack<Type>();
+		this.operandesIdent =new Stack<Ident>();
 		this.operators=new Stack<Operateur>();
 	}
 	
@@ -42,6 +44,10 @@ public class Expression
 	// Peek le type d'opérande
 	public Type peekTypeOperande() {
 		return this.operandes.peek();
+	}
+	
+	public Operateur getOperateur(){
+		return this.operators.pop();
 	}
 	
 	public Type popTypeOperande() {

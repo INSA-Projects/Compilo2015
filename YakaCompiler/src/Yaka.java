@@ -668,9 +668,9 @@ public class Yaka implements YakaConstants {
 
   static final public void retourne() throws ParseException {
     jj_consume_token(RETOURNE);
-         // retourne : utilise tailleParam+2
-        yvm.retourne(Declaration.fonctionDeclaration.tailleParams()+4);
     expression();
+                         // retourne : utilise tailleParam+2
+        yvm.retourne(Declaration.fonctionDeclaration.tailleParams()+4);
   }
 
   static private boolean jj_initialized_once = false;

@@ -411,9 +411,13 @@ void argumentsFonction() :{}
 void retourne() : {}
 {
 	<RETOURNE>
-	{// retourne : utilise tailleParam+2
-	yvm.retourne(Declaration.fonctionDeclaration.tailleParams()+4);}
+
 	expression()
+	
+			{// retourne : utilise tailleParam+2
+	yvm.retourne(Declaration.fonctionDeclaration.tailleParams()+4);}
 }
+
+
 	
 	
