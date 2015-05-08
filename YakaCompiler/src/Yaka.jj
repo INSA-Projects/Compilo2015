@@ -11,7 +11,7 @@ public class Yaka {
   public static TabIdent tabIdent;
   public static Expression expression;
   public static YakaToAsm yvm;
-  public static final String ASMfilename = "org.asm";
+  //public static final String ASMfilename = "org.asm";
   //public static final String YVMfilename = "code.jpeg";
   public static String YVMfilename;
  
@@ -139,7 +139,7 @@ TOKEN  :
 /**************************************/
 void prog() : {}
 {
-   <PROGRAMME>  <ident> {YVMfilename = YakaTokenManager.identLu;yvm.entete(); }
+   <PROGRAMME>  <ident> {yvm.setFileName(YakaTokenManager.identLu); yvm.entete(); }
    (declFonction())*
    <PRINCIPAL>{yvm.enteteMain();}
    bloc()

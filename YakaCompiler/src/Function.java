@@ -60,7 +60,6 @@ public class Function extends Ident
 	
 	// Effectue le contrôle de type des paramètres lors de l'appel de la fonction
 	public void controlTypeParam() {
-		System.out.println("parameters function"+this.toString()+ " : "+this.parameters.toString()+"\nparametereATester :"+this.parametreATester.toString());
 		
 		// Si différence de taille entre paramètres attendu et paramètres lus : ERROR
 		if (this.parameters.size() != this.parametreATester.size()) {
