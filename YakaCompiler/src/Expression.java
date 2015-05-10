@@ -21,6 +21,7 @@ public class Expression
 			{Type.ERREUR,Type.BOOLEEN,Type.ERREUR}, // OU
 			{Type.ENTIER,Type.ERREUR,Type.ERREUR}, // NEG
 			{Type.ERREUR,Type.BOOLEEN,Type.ERREUR}, // NON
+			{Type.ENTIER,Type.ERREUR,Type.ERREUR}, // MAX
 	};
 	// Pile des opérateurs dans une expression
 	private  Stack<Operateur> operators;
@@ -64,7 +65,9 @@ public class Expression
 		
 		// pop la deuxieme operande
 		// Seulement dans le cas d'une opération binaire	
-		if (!(operator.ordinal() == Operateur.NEG.ordinal() || operator.ordinal() == Operateur.NON.ordinal())) {
+		if (!(operator.ordinal() == Operateur.NEG.ordinal() 
+				|| operator.ordinal() == Operateur.NON.ordinal())) 
+		{
 			Type tmp = this.operandes.pop();
 			// En Yaka on suppose les deux opérandes de même type
 			if (tmp!=operande) {
@@ -141,6 +144,12 @@ public class Expression
 		case NON :
 			this.operandes.push(tabControl[operator.ordinal()][operande.ordinal()]);
 			Yaka.yvm.inot();
+			break;
+			
+		case MAX :
+
+			this.operandes.push(tabControl[operator.ordinal()][operande.ordinal()]);
+			Yaka.yvm.imax();
 			break;
 			
 		default:

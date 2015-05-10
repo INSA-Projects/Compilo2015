@@ -322,6 +322,16 @@ public class YakaToAsm extends YVM
 		write("; fermebloc"+taille+"\n"+"leave"+"\n"+"ret "+taille+"\n");
 	}
 	
-	
+	public void imax(){
+		write("; imax\n"
+				+ "pop bx\n"
+				+"pop ax\n"
+				+"cmp ax,bx\n"
+				+"jle $+6\n"
+				+"push ax\n"
+				+"jmp $+4\n"
+				+"push bx\n"
+				);
+	}
 	
 }

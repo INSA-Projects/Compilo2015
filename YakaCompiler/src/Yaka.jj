@@ -112,7 +112,7 @@ TOKEN :
 | <ECRIRE : "ECRIRE">
 | <LIRE : "LIRE">
 | <ALALIGNE : "ALALIGNE">
-
+| <MAX : "max">
 }
 
 
@@ -282,8 +282,19 @@ void facteur() : {}
 void primaire(): {}
 {
    valeur() 
- | "(" expression() ")" 
+ | "(" expression() ")"
  
+ | < MAX >
+ 
+ "[" expression()
+ (
+  {expression.pushOperator(Operateur.MAX);}
+  
+ "," expression()
+ 
+ {expression.controlType();}
+ 
+ )+ "]"
 }
 
 void valeur() : {}

@@ -63,15 +63,17 @@ public interface YakaConstants {
   /** RegularExpression Id. */
   int ALALIGNE = 34;
   /** RegularExpression Id. */
-  int chiffre = 35;
+  int MAX = 35;
   /** RegularExpression Id. */
-  int entier = 36;
+  int chiffre = 36;
   /** RegularExpression Id. */
-  int lettre = 37;
+  int entier = 37;
   /** RegularExpression Id. */
-  int ident = 38;
+  int lettre = 38;
   /** RegularExpression Id. */
-  int chaine = 39;
+  int ident = 39;
+  /** RegularExpression Id. */
+  int chaine = 40;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -115,6 +117,7 @@ public interface YakaConstants {
     "\"ECRIRE\"",
     "\"LIRE\"",
     "\"ALALIGNE\"",
+    "\"max\"",
     "<chiffre>",
     "<entier>",
     "<lettre>",
@@ -127,6 +130,8 @@ public interface YakaConstants {
     "\")\"",
     "\"ECRIRE(\"",
     "\"(\"",
+    "\"[\"",
+    "\"]\"",
     "\"<>\"",
     "\"<\"",
     "\"<=\"",

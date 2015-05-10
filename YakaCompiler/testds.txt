@@ -1,0 +1,11 @@
+PROGRAMME test
+
+PRINCIPAL
+VAR ENTIER res;
+VAR ENTIER i;
+
+res = max[i,5]
+
+FPRINCIPAL
+
+FPROGRAMME

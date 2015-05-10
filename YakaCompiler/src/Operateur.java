@@ -13,5 +13,6 @@ public enum Operateur {
 	ET,
 	OU,
 	NON,
-	NEG
+	NEG,
+	MAX
 }
