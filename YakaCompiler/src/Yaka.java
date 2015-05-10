@@ -584,11 +584,12 @@ public class Yaka implements YakaConstants {
          // génération de l'entete de la fonction
         yvm.enteteFonction(nomFonctionDeclaration);
     paramForms();
-    bloc();
-    jj_consume_token(FFONCTION);
-                 // ajout de la fonction dans tabIdent
+         // ajout de la fonction dans tabIdent
         tabIdent.putFonction(nomFonctionDeclaration, Declaration.fonctionDeclaration);
-        // Reset des locaux dans tabIdent
+    bloc();
+          tabIdent.printMap();
+    jj_consume_token(FFONCTION);
+          // Reset des locaux dans tabIdent
         tabIdent.clearLoco();
          yvm.fermeBloc(Declaration.fonctionDeclaration.tailleParams());
   }

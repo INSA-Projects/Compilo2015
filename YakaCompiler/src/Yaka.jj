@@ -355,15 +355,14 @@ void declFonction() : {}
 	 
 	paramForms()
 	
-	bloc()	
-		
+	{// ajout de la fonction dans tabIdent
+	tabIdent.putFonction(nomFonctionDeclaration, Declaration.fonctionDeclaration);}
 	
-	
+	bloc()		
+
 	<FFONCTION>
-	
-		{// ajout de la fonction dans tabIdent
-	tabIdent.putFonction(nomFonctionDeclaration, Declaration.fonctionDeclaration);
-	// Reset des locaux dans tabIdent
+	
+	{ // Reset des locaux dans tabIdent
 	tabIdent.clearLoco();}
 	
 	
