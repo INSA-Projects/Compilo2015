@@ -25,7 +25,7 @@ ALALIGNE;
 k = max(i,min(j,5))+2;
 b=sup(1+max(i,j-5), min(i*2,j));
 ALALIGNE;
-ECRIRE(k)
+ECRIRE(k);
 ALALIGNE;
 ECRIRE(b);
 FPRINCIPAL

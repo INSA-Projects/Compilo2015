@@ -246,10 +246,15 @@ public class YakaToAsm extends YVM
 				+ "\tcall lirent\n");
 	}
 	
-	public void ecrireEnt()
+	public void ecrire(Type t)
 	{
+		if (t==Type.ENTIER){
 		this.write("; ecrireEnt\n"
 				+ "\tcall ecrent\n");
+		}else {
+			this.write("; ecrireBool\n"
+					+ "\tcall ecrbool\n");
+		}
 	}
 	
 	// iteration
