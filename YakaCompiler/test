@@ -1,0 +1,40 @@
+
+	; entete
+	extrn lirent:proc, ecrent:proc
+	extrn ecrbool:proc
+	extrn ecrch:proc, ligsuiv:proc
+.model SMALL
+.586
+.CODE
+
+	debut :
+	STARTUPCODE
+	main :
+
+	; ouvbloc fonction 4
+enter 4,0
+
+	; iload -4
+	push word ptr [bp-4]
+
+	; iconst 5
+	push 5
+
+	; imax
+pop bx
+pop ax
+cmp ax,bx
+jle $+6
+push ax
+jmp $+4
+push bx
+
+	; istore -2
+	pop ax
+	mov word ptr [bp-2],ax
+
+	; queue
+	nop
+	EXITCODE
+	END debut
+

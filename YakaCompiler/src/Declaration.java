@@ -41,7 +41,6 @@ public class Declaration {
 	public void setIdent(Type type, int value) {
 		IdConst ident = new IdConst(type, value);
 		Yaka.tabIdent.putConst(keyName,ident);
-		Yaka.tabIdent.printMap();
 	}
 	
 	// Ajout dans TabIdent d'une variable

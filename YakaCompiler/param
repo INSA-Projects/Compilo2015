@@ -1,23 +1,9 @@
 
-entete
-
-ouvrePrinc 6
-
-iload -1
-
-iload -6
-
-iload -1
-
-iffaux SINON1
-
-iload -6
-
-goto FSI1
-
-SINON1 :
-
-iload -1
-
-FSI1 :
+	; entete
+	extrn lirent:proc, ecrent:proc
+	extrn ecrbool:proc
+	extrn ecrch:proc, ligsuiv:proc
+.model SMALL
+.586
+.CODE
 

@@ -1,3 +1,5 @@
+import java.awt.List;
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class Function extends Ident
@@ -6,7 +8,7 @@ public class Function extends Ident
 
 	
 	// Paramètres de la fonction
-	private Stack<Param> parameters = new Stack<Param>();
+	private ArrayList<Param> parameters = new ArrayList<Param>();
 	
 	// Type passés en paramètres lors d'un appel à la fonction
 	private Stack<Type> parametreATester = new Stack<Type>();
@@ -33,7 +35,7 @@ public class Function extends Ident
 		cptParam++;
 		param.setOffset(cptParam); 
 		// temporaire
-		this.parameters.push(param);
+		this.parameters.add(param);
 	}
 	
 	// calcule l'offset (dans la pile de la fonction) de chaque paramètre  
@@ -70,8 +72,8 @@ public class Function extends Ident
 		}
 		// Sinon contrôle de type
 		else {
-			for(int i = 0; i<parameters.size();i++) {
-				Type typeParamAttendu = this.parameters.elementAt(i).getType();
+			for(int i = parameters.size()-1 ; i>=0 ; i--) {
+				Type typeParamAttendu = this.parameters.get(i).getType();
 				Type typeParamATester = this.parametreATester.pop();
 				
 				if (typeParamAttendu !=  typeParamATester) {

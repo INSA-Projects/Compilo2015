@@ -587,7 +587,6 @@ public class Yaka implements YakaConstants {
          // ajout de la fonction dans tabIdent
         tabIdent.putFonction(nomFonctionDeclaration, Declaration.fonctionDeclaration);
     bloc();
-          tabIdent.printMap();
     jj_consume_token(FFONCTION);
           // Reset des locaux dans tabIdent
         tabIdent.clearLoco();
